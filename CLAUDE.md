@@ -59,10 +59,12 @@ Itens que o `.gitignore` deve sempre bloquear: `.env*` (exceto `.env.example`), 
 - Recorte proposto para o prazo do desafio: uma única fatia vertical. Um áudio vira transcrição (Scribe v2), átomos e um capítulo curto com rastreio, com limpeza, extração, perfil de voz e redação rodando no aparelho em modelo open-weight (RF1, RF2, RF4, RF5, RF6 e RF8 em versão mínima), mais a documentação e o post. O resto do PRD é o plano do produto, não do prazo.
 - Na fatia, só se porta para TypeScript o necessário: os scripts `atomos` e `rastreio` (com os mesmos testes do Python) e os prompts de limpeza, extrator de átomos, analista de voz e redator de capítulos, com o bloco comum.
 - Perfil de voz mínimo: estatísticas calculadas por código, trechos reais da autora como exemplos e no máximo 3 traços descritos pelo modelo. A autora aprova cada traço, e o redator usa só os traços aprovados.
+- Como o harness roda na fatia (runner, saída em JSON por esquema convertida em arquivos por código, verificação `limpeza`, formato dos traços de voz, ModeloLocal, testes): `docs/harness-fatia.md`, aprovado.
+- Modelo local: Gemma 4 E2B instruct, GGUF Q4_K_M (cerca de 3,1 GB, Apache 2.0), baixado do Hugging Face no aparelho.
 - Telas mínimas, seguindo o protótipo do Claude Design: escolher ou gravar um áudio, transcrever, aprovar o perfil de voz, ver as ideias e ler o capítulo com os IDs de origem.
 - O maestro (RF11) fica fora do recorte, em tela e em código: na fatia, a ordem das etapas é um runner determinístico em TypeScript, sem agente orquestrador. A voz da ghost writer aparece só nas notas e perguntas que o redator de capítulos devolve.
 - Entregáveis do desafio: repositório público com README (sem segredos nem dados pessoais), demonstração em vídeo e o post na DEV.
 
 ## Questões em aberto
 
-Terceiro aparelho (modelo e RAM), pessoa para quem o app é feito, horas da assinatura Creative valendo para a API (ou créditos em hacktoberfest.com/my), política de uso do áudio na conta ElevenLabs, `whisper.rn` como transcrição alternativa para quem clonar o repositório, modelo local (Gemma 4 ou Qwen3), saída estruturada no `llama.rn`, formato de exportação e nome final do app.
+Terceiro aparelho (modelo e RAM), pessoa para quem o app é feito, horas da assinatura Creative valendo para a API (ou créditos em hacktoberfest.com/my), política de uso do áudio na conta ElevenLabs, `whisper.rn` como transcrição alternativa para quem clonar o repositório, qualidade da saída em JSON (`json_schema`) do Gemma 4 no aparelho, velocidade no S24 (Exynos), formato de exportação e nome final do app.

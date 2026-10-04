@@ -43,3 +43,15 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Decisão:** `expo-build-properties` com `android.buildArchs: ["arm64-v8a"]`.
 - **Motivo:** o primeiro development build compilou o llama.cpp para 4 arquiteturas, gerou um APK de 278 MB e bateu o limite de 45 min do plano gratuito do EAS (terminou como CANCELED, mas com o APK completo). Os Samsung S24 e S25 são arm64; as outras arquiteturas só servem a emuladores.
 - **PRD afetado:** nenhum (Arquitetura, linha "Aplicativo").
+
+## 2026-10-04: harness da fatia aprovado
+
+- **Decisão:** aprovado `docs/harness-fatia.md`. Pontos principais: o modelo responde em JSON imposto por esquema e o código escreve os arquivos nos formatos dos prompts; limpeza por parágrafo, com a verificação nova `limpeza` (nenhuma palavra que não esteja no bruto); traços de voz em linhas `[ ]`/`[x]`/`[-]` com evidência literal conferida por código; uma nova tentativa automática por verificação falha, depois erro na tela; demonstração com 2 a 3 áudios curtos. Exceção à regra de portagem: só `atomos` e `rastreio` e seus 10 testes entram no prazo.
+- **Motivo:** modelo pequeno erra formatos; o que dá para calcular por código sai do modelo. A exceção dos testes cabe no prazo sem perder a verificação do que a fatia usa.
+- **PRD afetado:** Harness (saída estruturada e verificação `limpeza`), RF6 (perfil mínimo).
+
+## 2026-10-04: modelo local Gemma 4 E2B
+
+- **Decisão:** Gemma 4 E2B instruct, GGUF Q4_K_M (cerca de 3,1 GB), nos dois aparelhos, baixado do Hugging Face na primeira abertura. E4B (cerca de 5 GB) só como opção futura para o redator no S25. Contexto inicial de 8192 tokens; temperaturas iniciais: limpeza 0,1, extrator 0,2, analista 0,3, redator 0,6.
+- **Motivo:** cabe com folga no piso de 8 GB; licença Apache 2.0, sem cadastro; há uso documentado com o llama.rn; habilita a categoria Gemma do desafio. O E4B com contexto e app passaria de 6 GB.
+- **PRD afetado:** Arquitetura (linha "Modelo local"); Decisões em aberto ("Qual modelo local usar" e "O llama.rn oferece saída estruturada").
