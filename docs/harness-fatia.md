@@ -80,7 +80,7 @@ Três partes, gravadas em `voz/guia-de-voz.md`:
 Formato dos traços no arquivo (uma linha por traço, como as perguntas):
 
 ```
-- [ ] traço: <texto> | evidência: "<trecho>" | fonte: audio-NN [mm:ss] | ocorrências: N
+- [ ] nome: <rótulo curto, ex.: Ritmo> | traço: <texto> | evidência: "<trecho>" | fonte: audio-NN [mm:ss] | ocorrências: N
 ```
 
 `[ ]` pendente, `[x]` aprovado, `[-]` recusado. Só a tela de aprovação muda o marcador. O cabeçalho do arquivo tem `status: rascunho` até a autora decidir todos os traços, e então `status: aprovado`.
@@ -89,7 +89,7 @@ Formato dos traços no arquivo (uma linha por traço, como as perguntas):
 
 - **Entrada montada pelo runner:** outline mínimo (um capítulo, `C-01`, com todos os átomos); guia com estatísticas, exemplos e **só os traços `[x]`**; átomos com texto completo. Capítulo anterior e `decisoes.md` vão vazios.
 - Esquema: `{ titulo, paragrafos: [{ texto, atomos: ["A-001"] }], notas: [string] (≤ 5), perguntas: [{ texto, origem: [ids], tipo: "lacuna|contradição|confirmação" }] }`.
-- O código grava `C-01.md` com o cabeçalho (`titulo`, `status: rascunho`), cada parágrafo seguido de `<!-- A-001, A-002 -->`, as notas e as perguntas; as perguntas também vão para `controle/perguntas.md` no formato comum.
+- O código grava `C-01.md` com o cabeçalho (`titulo`, `status: rascunho`) e só o texto, cada parágrafo seguido de `<!-- A-001, A-002 -->`. As notas vão para `C-01.notas.md` e as perguntas para `controle/perguntas.md`, no formato comum. (Notas e perguntas dentro de `C-01.md` seriam lidas pelo `rastreio` como parágrafos sem átomo.)
 - Tamanho-alvo: de 400 a 700 palavras.
 - Depois roda `rastreio` no modo normal: ID inexistente é erro (nova tentativa); parágrafo sem átomo é aviso, mostrado na tela, porque transições neutras são permitidas.
 - Relações `contradiz` entre átomos precisam aparecer como pergunta. Se o capítulo não tiver a pergunta, o código a acrescenta.
