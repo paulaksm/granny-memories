@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Granny Memories",
+    "slug": "granny-memories",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.paulaksm.grannymemories"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ed149af1-d9d1-4065-ad70-2c1a8f865e05"
+      }
+    },
+    "owner": "backpackexpo",
+    "plugins": [
+      "expo-secure-store",
+      "expo-build-properties",
+      "llama.rn"
+    ]
+  }
+}
