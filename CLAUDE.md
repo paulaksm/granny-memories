@@ -55,7 +55,7 @@ Itens que o `.gitignore` deve sempre bloquear: `.env*` (exceto `.env.example`), 
 ## Estado atual
 
 - PRD pronto. Prompts dos agentes e scripts de verificação em Python prontos e testados.
-- Esqueleto Expo (SDK 57) com dev client, llama.rn e armazenamento seguro; development build pelo EAS (perfil `development`).
+- App Expo (SDK 57) com as telas do protótipo, harness em TypeScript (`src/harness`, 22 testes), Scribe v2 e Gemma 4 E2B no aparelho; fluxo do áudio ao capítulo testado de ponta a ponta no S24 (ver `docs/decisoes.md`). README pronto. Falta: vídeo de demonstração e post na DEV.
 - Recorte proposto para o prazo do desafio: uma única fatia vertical. Um áudio vira transcrição (Scribe v2), átomos e um capítulo curto com rastreio, com limpeza, extração, perfil de voz e redação rodando no aparelho em modelo open-weight (RF1, RF2, RF4, RF5, RF6 e RF8 em versão mínima), mais a documentação e o post. O resto do PRD é o plano do produto, não do prazo.
 - Na fatia, só se porta para TypeScript o necessário: os scripts `atomos` e `rastreio` (com os mesmos testes do Python) e os prompts de limpeza, extrator de átomos, analista de voz e redator de capítulos, com o bloco comum.
 - Perfil de voz mínimo: estatísticas calculadas por código, trechos reais da autora como exemplos e no máximo 3 traços descritos pelo modelo. A autora aprova cada traço, e o redator usa só os traços aprovados.

@@ -82,3 +82,14 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Decisão:** a medição no S25 fica fora da entrega do desafio. O app é validado e demonstrado no Galaxy S24.
 - **Motivo:** prazo. O S24 (Exynos, só CPU, 7,4 GB) é o caso mais difícil dos dois; o S25 deve ir igual ou melhor.
 - **PRD afetado:** Qualidade e métricas, teste "Desempenho" (S25 pendente).
+
+## 2026-10-04: teste ponta a ponta no S24 e ajustes
+
+- **Resultado:** no Galaxy S24, com um áudio de voz sintética (26 s), o app fez o fluxo inteiro: escolher o áudio, transcrever (Scribe v2), limpar, separar ideias, perfil de voz (cerca de 2 min 35 s), aprovar traços e escrever o capítulo (cerca de 1 min 20 s), com cada parágrafo rastreado e a aprovação do capítulo.
+- **Correções feitas no teste:**
+  - o fetch do Expo SDK 57 não aceita `{ uri, name, type }` em FormData; o áudio vai como `File` do expo-file-system (que é um `Blob`);
+  - a importação disparava duas transcrições; agora a tela de carregamento é a única que transcreve;
+  - o Android fechou o app por falta de memória numa segunda rodada; o modelo agora é liberado ao fim de cada tarefa longa, e qualquer contexto esquecido é solto antes de carregar;
+  - prompts: traços de voz sobre o jeito de contar (não o assunto), resumos em primeira pessoa e com as palavras dela, e o redator recebe só os trechos literais (antes herdava "pois" dos resumos).
+- **Limites observados:** o Gemma 4 E2B ainda escreve traços em terceira pessoa ("A autora…") e às vezes um traço sobre o assunto; a autora recusa esses na tela. Os resumos das ideias às vezes acrescentam "pois".
+- **PRD afetado:** Qualidade e métricas, teste "Escrita" (primeira medição) e "Desempenho" (S24).
