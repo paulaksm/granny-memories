@@ -5,7 +5,55 @@ import { StatusBar } from 'expo-status-bar';
 import * as SecureStore from 'expo-secure-store';
 import { BuildInfo, getBackendDevicesInfo } from 'llama.rn';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import { ESQUEMA_EXTRATOR, ESQUEMA_LIMPEZA } from './src/harness/esquemas';
+import { verificarLimpeza } from './src/harness/limpeza';
+import { TEMPERATURAS } from './src/harness/modelo';
+import { EXTRATOR, LIMPEZA, sistema } from './src/harness/prompts';
+import { ModeloLlama } from './src/modelo/llama';
+
+// Teste técnico do modelo (etapa 3): o GGUF é copiado pelo cabo para esta pasta.
+const CAMINHO_MODELO = '/data/user/0/com.paulaksm.grannymemories/files/gemma-4-E2B-it-Q4_K_M.gguf';
+const PARAGRAFO_SINTETICO =
+  'É... toda sexta-feira, né, a casa, a casa cheirava a laranja. Hum, era dia de bolo, sabe, ' +
+  'e a gente ficava na porta da cozinha esperando a forma sair do forno, e a vó dizia que ainda não tava no ponto.';
+
+async function testarModelo(log: (c: Check) => void) {
+  const modelo = new ModeloLlama(CAMINHO_MODELO);
+  const t0 = Date.now();
+  await modelo.carregar();
+  log({ label: 'Gemma carregado', result: `${((Date.now() - t0) / 1000).toFixed(1)} s`, ok: true });
+
+  const t1 = Date.now();
+  const limpo = (await modelo.gerar({
+    sistema: sistema(LIMPEZA),
+    usuario: PARAGRAFO_SINTETICO,
+    esquema: ESQUEMA_LIMPEZA,
+    maxTokens: 256,
+    temperatura: TEMPERATURAS.limpeza,
+  })) as { texto: string };
+  const verif = verificarLimpeza('audio-teste', [PARAGRAFO_SINTETICO], [limpo.texto]);
+  log({
+    label: 'Limpeza',
+    result: `${((Date.now() - t1) / 1000).toFixed(1)} s | ${JSON.stringify(modelo.ultimaMedida)}\n${limpo.texto}\nverificação: ${verif.ok ? 'ok' : verif.errosComoTexto()}`,
+    ok: verif.ok,
+  });
+
+  const t2 = Date.now();
+  const atomos = await modelo.gerar({
+    sistema: sistema(EXTRATOR),
+    usuario: `[00:00] ${limpo.texto}`,
+    esquema: ESQUEMA_EXTRATOR,
+    maxTokens: 1024,
+    temperatura: TEMPERATURAS.extrator,
+  });
+  log({
+    label: 'Extrator',
+    result: `${((Date.now() - t2) / 1000).toFixed(1)} s | ${JSON.stringify(modelo.ultimaMedida)}\n${JSON.stringify(atomos, null, 1)}`,
+    ok: true,
+  });
+  await modelo.liberar();
+}
 
 type Check = { label: string; result: string; ok: boolean | null };
 
@@ -49,9 +97,24 @@ async function runChecks(): Promise<Check[]> {
 
 export default function App() {
   const [checks, setChecks] = useState<Check[]>([]);
+  const [rodando, setRodando] = useState(false);
+
+  const rodarModelo = () => {
+    setRodando(true);
+    const log = (c: Check) => {
+      console.log('[modelo]', JSON.stringify(c));
+      setChecks((atual) => [...atual, c]);
+    };
+    testarModelo(log)
+      .catch((e) => log({ label: 'Modelo', result: String(e), ok: false }))
+      .finally(() => setRodando(false));
+  };
 
   useEffect(() => {
-    runChecks().then(setChecks);
+    runChecks().then((resultado) => {
+      console.log('[fumaca]', JSON.stringify(resultado));
+      setChecks(resultado);
+    });
   }, []);
 
   return (
@@ -65,6 +128,9 @@ export default function App() {
           <Text style={styles.result}>{c.result}</Text>
         </Text>
       ))}
+      <Pressable style={styles.botao} onPress={rodarModelo} disabled={rodando}>
+        <Text style={styles.botaoTexto}>{rodando ? 'Rodando o modelo…' : 'Testar modelo'}</Text>
+      </Pressable>
       <StatusBar style="auto" />
     </ScrollView>
   );
@@ -75,4 +141,6 @@ const styles = StyleSheet.create({
   title: { fontSize: 20, fontWeight: '600' },
   check: { fontSize: 16 },
   result: { fontFamily: 'monospace', fontSize: 12 },
+  botao: { backgroundColor: '#C56127', borderRadius: 14, padding: 18, alignItems: 'center' },
+  botaoTexto: { color: '#fff', fontSize: 19, fontWeight: '700' },
 });
