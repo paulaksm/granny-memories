@@ -5,8 +5,8 @@ import type { RespostaScribe } from '../harness/transcricao';
 const URL_SCRIBE = 'https://api.elevenlabs.io/v1/speech-to-text';
 export const MODELO_SCRIBE = 'scribe_v2';
 
-/** Arquivo do app ({ uri, name, type }, como o fetch do React Native aceita) ou Blob. */
-export type ArquivoAudio = { uri: string; name: string; type: string } | Blob;
+/** Um Blob: no app, o File do expo-file-system (o fetch do Expo não aceita { uri, name, type }). */
+export type ArquivoAudio = Blob;
 
 export type FalhaScribe = 'sem-chave' | 'chave-invalida' | 'sem-rede' | 'servico';
 
@@ -30,13 +30,13 @@ export async function transcrever(
   corpo.append('model_id', MODELO_SCRIBE);
   corpo.append('timestamps_granularity', 'word');
   corpo.append('tag_audio_events', 'false');
-  if (arquivo instanceof Blob) corpo.append('file', arquivo, nome);
-  else corpo.append('file', arquivo as unknown as Blob);
+  corpo.append('file', arquivo, nome);
 
   let resposta: Response;
   try {
     resposta = await fetch(URL_SCRIBE, { method: 'POST', headers: { 'xi-api-key': chave }, body: corpo });
-  } catch {
+  } catch (e) {
+    console.warn('[scribe] falha de rede:', String(e));
     throw new ErroScribe('sem-rede', 'Sem internet. O áudio ficou na fila.');
   }
   if (resposta.status === 401) {

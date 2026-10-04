@@ -191,20 +191,34 @@ export async function importarAudio(origemUri: string, nome: string, livroId: st
   await new File(origemUri).copy(destino);
   const audio: Audio = { id, nome: nome || `História ${n}`, arquivo: `${id}.${ext}`, duracao: '', livroId };
   await salvar({ ...d, audios: [...d.audios, audio], seq: n + 1 });
-  transcreverAudio(id);
   return id;
 }
 
-export async function transcreverAudio(id: string) {
+const transcricoes = new Map<string, Promise<void>>();
+
+/** Transcreve uma vez; quem chamar de novo durante a transcrição espera a mesma. */
+export function transcreverAudio(id: string): Promise<void> {
+  const andamento = transcricoes.get(id);
+  if (andamento) return andamento;
+  const p = transcreverAgora(id).finally(() => transcricoes.delete(id));
+  transcricoes.set(id, p);
+  return p;
+}
+
+async function transcreverAgora(id: string) {
   const audio = estado.dados.audios.find((a) => a.id === id);
-  if (!audio || estado.tarefa) return;
+  if (!audio) return;
+  if (estado.tarefa) {
+    mudar({ erro: 'Espere a tarefa atual terminar.' });
+    return;
+  }
   mudar({ tarefa: { tipo: 'transcrever', alvo: id, fracao: 0.1 }, erro: null });
   try {
     const chave = await SecureStore.getItemAsync(CHAVE_ELEVENLABS);
     const f = arquivoDeAudio(audio.arquivo);
     let duracao = '';
     const pedir = async (): Promise<RespostaScribe> => {
-      const r = await transcrever({ uri: f.uri, name: audio.arquivo, type: 'audio/mp4' }, chave, audio.arquivo);
+      const r = await transcrever(f as unknown as Blob, chave, audio.arquivo);
       const fim = Math.max(0, ...(r.words ?? []).map((w) => w.end ?? 0));
       duracao = marcaTempo(fim);
       return r;
