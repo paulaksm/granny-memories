@@ -19,3 +19,9 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Decisão:** `.gitignore` passa a bloquear `*.mp4`, `*.mov`, `*.webm` e `*.mkv`.
 - **Motivo:** o vídeo de demonstração pode ter voz real. Ele é publicado na DEV ou no YouTube, não no repositório.
 - **PRD afetado:** nenhum.
+
+## 2026-10-04: DevRelay fora do repositório, por enquanto
+
+- **Decisão:** `.claude/`, `.devrelay/` e `.mcp.json` ficam no `.gitignore` e o trabalho segue sem o DevRelay.
+- **Motivo:** escolha da autora do projeto. Decisão provisória: pode voltar, e aí basta tirar essas três linhas do `.gitignore` (a credencial em `.devrelay/home/` continua bloqueada).
+- **PRD afetado:** nenhum.

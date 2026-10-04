@@ -102,3 +102,8 @@ Thumbs.db
 # Ferramentas locais (configurações e credenciais da máquina)
 .claude/settings.local.json
 .devrelay/home/
+
+# DevRelay (fora por enquanto; pode voltar)
+.claude/
+.devrelay/
+.mcp.json
