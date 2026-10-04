@@ -25,3 +25,9 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Decisão:** `.claude/`, `.devrelay/` e `.mcp.json` ficam no `.gitignore` e o trabalho segue sem o DevRelay.
 - **Motivo:** escolha da autora do projeto. Decisão provisória: pode voltar, e aí basta tirar essas três linhas do `.gitignore` (a credencial em `.devrelay/home/` continua bloqueada).
 - **PRD afetado:** nenhum.
+
+## 2026-10-04: esqueleto do app
+
+- **Decisão:** Expo SDK 57 (React Native 0.86, New Architecture), template `blank-typescript`, com `expo-dev-client`, `expo-secure-store`, `expo-build-properties` e `llama.rn` fixado em `0.13.0-rc.6` (a tag `latest` no npm é esse release candidate; versão exata para builds reproduzíveis). Pacote Android `com.paulaksm.grannymemories`. Projeto EAS `@pksm/granny-memories` (`1a101ff8-8296-4094-8325-656d80de9973`); o primeiro, criado por engano na org `backpackexpo`, foi descartado. Keystore gerada e guardada pelo EAS (nunca no repositório). Perfil `development` gera APK de distribuição interna.
+- **Motivo:** o llama.rn exige New Architecture e código nativo, então precisa de development build. Build na nuvem pelo EAS para não instalar Android SDK e NDK nesta máquina.
+- **PRD afetado:** nenhum (segue "Arquitetura").

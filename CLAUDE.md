@@ -55,7 +55,7 @@ Itens que o `.gitignore` deve sempre bloquear: `.env*` (exceto `.env.example`), 
 ## Estado atual
 
 - PRD pronto. Prompts dos agentes e scripts de verificação em Python prontos e testados.
-- Ainda não há esqueleto do app.
+- Esqueleto Expo (SDK 57) com dev client, llama.rn e armazenamento seguro; development build pelo EAS (perfil `development`).
 - Recorte proposto para o prazo do desafio: uma única fatia vertical. Um áudio vira transcrição (Scribe v2), átomos e um capítulo curto com rastreio, com limpeza, extração e redação rodando no aparelho em modelo open-weight (RF1, RF2, RF4, RF5 e RF8 em versão mínima), mais a documentação e o post. O resto do PRD é o plano do produto, não do prazo.
 - O maestro (RF11) fica fora do recorte, em tela e em código: na fatia, a ordem das etapas é um runner determinístico em TypeScript, sem agente orquestrador. A voz da ghost writer aparece só nas notas e perguntas que o redator de capítulos devolve.
 - Entregáveis do desafio: repositório público com README (sem segredos nem dados pessoais), demonstração em vídeo e o post na DEV.

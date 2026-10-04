@@ -22,16 +22,16 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "ed149af1-d9d1-4065-ad70-2c1a8f865e05"
-      }
-    },
-    "owner": "backpackexpo",
     "plugins": [
       "expo-secure-store",
       "expo-build-properties",
       "llama.rn"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1a101ff8-8296-4094-8325-656d80de9973"
+      }
+    },
+    "owner": "pksm"
   }
 }
