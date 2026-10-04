@@ -76,3 +76,9 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Observação de qualidade:** o resumo de uma ideia trocou "a gente" por "a família", palavra que ela não usou. O resumo não passa por verificação literal; a tela mostra o trecho original ao lado.
 - **Decisão:** manter o Gemma 4 E2B, só CPU no S24, e seguir com as telas. Falta medir no S25.
 - **PRD afetado:** Requisitos não funcionais (tempo de redação e memória, antes "a definir"); Plano e marcos, marco 1 (teste técnico) cumprido no S24.
+
+## 2026-10-04: entrega validada só no S24
+
+- **Decisão:** a medição no S25 fica fora da entrega do desafio. O app é validado e demonstrado no Galaxy S24.
+- **Motivo:** prazo. O S24 (Exynos, só CPU, 7,4 GB) é o caso mais difícil dos dois; o S25 deve ir igual ou melhor.
+- **PRD afetado:** Qualidade e métricas, teste "Desempenho" (S25 pendente).

@@ -67,4 +67,4 @@ Itens que o `.gitignore` deve sempre bloquear: `.env*` (exceto `.env.example`), 
 
 ## Questões em aberto
 
-Terceiro aparelho (modelo e RAM), pessoa para quem o app é feito, horas da assinatura Creative valendo para a API (ou créditos em hacktoberfest.com/my), política de uso do áudio na conta ElevenLabs, `whisper.rn` como transcrição alternativa para quem clonar o repositório, qualidade da saída em JSON (`json_schema`) do Gemma 4 no aparelho, velocidade no S24 (Exynos), formato de exportação e nome final do app.
+Terceiro aparelho (modelo e RAM), pessoa para quem o app é feito, horas da assinatura Creative valendo para a API (ou créditos em hacktoberfest.com/my), política de uso do áudio na conta ElevenLabs, `whisper.rn` como transcrição alternativa para quem clonar o repositório, qualidade da saída em JSON (`json_schema`) do Gemma 4 no aparelho, medição no S25 (fora da entrega do desafio), formato de exportação e nome final do app.
