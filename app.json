@@ -34,7 +34,14 @@
           }
         }
       ],
-      "llama.rn"
+      "llama.rn",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "O Granny Memories usa o microfone para gravar as suas histórias."
+        }
+      ],
+      "expo-font"
     ],
     "extra": {
       "eas": {
