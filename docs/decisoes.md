@@ -31,3 +31,9 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Decisão:** Expo SDK 57 (React Native 0.86, New Architecture), template `blank-typescript`, com `expo-dev-client`, `expo-secure-store`, `expo-build-properties` e `llama.rn` fixado em `0.13.0-rc.6` (a tag `latest` no npm é esse release candidate; versão exata para builds reproduzíveis). Pacote Android `com.paulaksm.grannymemories`. Projeto EAS `@pksm/granny-memories` (`1a101ff8-8296-4094-8325-656d80de9973`); o primeiro, criado por engano na org `backpackexpo`, foi descartado. Keystore gerada e guardada pelo EAS (nunca no repositório). Perfil `development` gera APK de distribuição interna.
 - **Motivo:** o llama.rn exige New Architecture e código nativo, então precisa de development build. Build na nuvem pelo EAS para não instalar Android SDK e NDK nesta máquina.
 - **PRD afetado:** nenhum (segue "Arquitetura").
+
+## 2026-10-04: perfil de voz mínimo entra no recorte
+
+- **Decisão:** o analista de voz entra na fatia vertical, em versão mínima. O perfil combina estatísticas calculadas por código, trechos reais da autora como exemplos e no máximo 3 traços descritos pelo modelo. A autora aprova cada traço, e o redator de capítulos usa só os aprovados. As telas mínimas seguem o protótipo do Claude Design: escolher ou gravar um áudio, transcrever, aprovar o perfil de voz, ver as ideias e ler o capítulo com os IDs de origem.
+- **Motivo:** sem perfil de voz, o capítulo não sai "na voz dela", que é a promessa central do app. Limitar a 3 traços e apoiar o resto em código reduz o peso sobre o modelo local pequeno.
+- **PRD afetado:** "Contexto", parágrafo "Recorte para o prazo" (acrescentar RF6 em versão mínima); RF6 (o critério completo, com traços sem limite e guia de voz, continua sendo o do produto).

@@ -56,7 +56,10 @@ Itens que o `.gitignore` deve sempre bloquear: `.env*` (exceto `.env.example`), 
 
 - PRD pronto. Prompts dos agentes e scripts de verificação em Python prontos e testados.
 - Esqueleto Expo (SDK 57) com dev client, llama.rn e armazenamento seguro; development build pelo EAS (perfil `development`).
-- Recorte proposto para o prazo do desafio: uma única fatia vertical. Um áudio vira transcrição (Scribe v2), átomos e um capítulo curto com rastreio, com limpeza, extração e redação rodando no aparelho em modelo open-weight (RF1, RF2, RF4, RF5 e RF8 em versão mínima), mais a documentação e o post. O resto do PRD é o plano do produto, não do prazo.
+- Recorte proposto para o prazo do desafio: uma única fatia vertical. Um áudio vira transcrição (Scribe v2), átomos e um capítulo curto com rastreio, com limpeza, extração, perfil de voz e redação rodando no aparelho em modelo open-weight (RF1, RF2, RF4, RF5, RF6 e RF8 em versão mínima), mais a documentação e o post. O resto do PRD é o plano do produto, não do prazo.
+- Na fatia, só se porta para TypeScript o necessário: os scripts `atomos` e `rastreio` (com os mesmos testes do Python) e os prompts de limpeza, extrator de átomos, analista de voz e redator de capítulos, com o bloco comum.
+- Perfil de voz mínimo: estatísticas calculadas por código, trechos reais da autora como exemplos e no máximo 3 traços descritos pelo modelo. A autora aprova cada traço, e o redator usa só os traços aprovados.
+- Telas mínimas, seguindo o protótipo do Claude Design: escolher ou gravar um áudio, transcrever, aprovar o perfil de voz, ver as ideias e ler o capítulo com os IDs de origem.
 - O maestro (RF11) fica fora do recorte, em tela e em código: na fatia, a ordem das etapas é um runner determinístico em TypeScript, sem agente orquestrador. A voz da ghost writer aparece só nas notas e perguntas que o redator de capítulos devolve.
 - Entregáveis do desafio: repositório público com README (sem segredos nem dados pessoais), demonstração em vídeo e o post na DEV.
 
