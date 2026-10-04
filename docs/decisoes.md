@@ -37,3 +37,9 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Decisão:** o analista de voz entra na fatia vertical, em versão mínima. O perfil combina estatísticas calculadas por código, trechos reais da autora como exemplos e no máximo 3 traços descritos pelo modelo. A autora aprova cada traço, e o redator de capítulos usa só os aprovados. As telas mínimas seguem o protótipo do Claude Design: escolher ou gravar um áudio, transcrever, aprovar o perfil de voz, ver as ideias e ler o capítulo com os IDs de origem.
 - **Motivo:** sem perfil de voz, o capítulo não sai "na voz dela", que é a promessa central do app. Limitar a 3 traços e apoiar o resto em código reduz o peso sobre o modelo local pequeno.
 - **PRD afetado:** "Contexto", parágrafo "Recorte para o prazo" (acrescentar RF6 em versão mínima); RF6 (o critério completo, com traços sem limite e guia de voz, continua sendo o do produto).
+
+## 2026-10-04: build só para arm64-v8a
+
+- **Decisão:** `expo-build-properties` com `android.buildArchs: ["arm64-v8a"]`.
+- **Motivo:** o primeiro development build compilou o llama.cpp para 4 arquiteturas, gerou um APK de 278 MB e bateu o limite de 45 min do plano gratuito do EAS (terminou como CANCELED, mas com o APK completo). Os Samsung S24 e S25 são arm64; as outras arquiteturas só servem a emuladores.
+- **PRD afetado:** nenhum (Arquitetura, linha "Aplicativo").
