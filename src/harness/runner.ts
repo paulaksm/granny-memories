@@ -259,7 +259,8 @@ export class Runner {
   }
 
   // ---------------------------------------------------------------- 6. redigir
-  async redigir(capitulo = 'C-01') {
+  /** `audios`, na ordem do capítulo; sem a lista, usa todas as ideias. */
+  async redigir(capitulo = 'C-01', audios?: string[]) {
     return this.rodar(ESCOPO_LIVRO, 'redigir', async () => {
       const guia = await this.arq.ler(ARQUIVOS.guiaVoz);
       if (!guia.includes('status: aprovado')) {
@@ -267,8 +268,18 @@ export class Runner {
         rel.erro('voz', 'a autora ainda não decidiu todos os traços de voz');
         return rel;
       }
-      const atomos = await carregarAtomos(this.arq);
-      const ids = Object.keys(atomos).sort();
+      const todos = await carregarAtomos(this.arq);
+      const audioDe = (id: string) => (todos[id].fonte ?? '').split(' ')[0];
+      const ordem = (id: string) => (audios ? audios.indexOf(audioDe(id)) : 0);
+      const ids = Object.keys(todos)
+        .filter((id) => !audios || audios.includes(audioDe(id)))
+        .sort((a, b) => ordem(a) - ordem(b) || a.localeCompare(b));
+      const atomos = Object.fromEntries(ids.map((id) => [id, todos[id]]));
+      if (ids.length === 0) {
+        const rel = new Relatorio('rastreio');
+        rel.erro(capitulo, 'nenhuma ideia nos áudios deste capítulo');
+        return rel;
+      }
       const outline = `${capitulo}: um capítulo com todas as ideias abaixo (${ids.join(', ')}).`;
       const textoAtomos = ids
         .map((id) => {
