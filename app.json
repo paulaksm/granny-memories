@@ -41,7 +41,8 @@
           "microphonePermission": "O Granny Memories usa o microfone para gravar as suas histórias."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-asset"
     ],
     "extra": {
       "eas": {
