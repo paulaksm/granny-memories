@@ -55,7 +55,9 @@ Regras do runner:
 ### 3. Limpeza
 
 - Roda **por parágrafo**, mantendo a marca de tempo fora do pedido ao modelo. Assim o modelo não consegue juntar, reordenar nem perder parágrafos.
-- Esquema: `{ "texto": string }` por parágrafo, e ao final `{ "qualidade": "boa|média|baixa", "motivo": string }` sobre o áudio inteiro.
+- Esquema: `{ "texto": string }` por parágrafo.
+- A `qualidade` do cabeçalho é calculada por código, pela proporção de palavras duvidosas `[?]` (acima de 3%: média; acima de 8%: baixa). Assim não há uma chamada extra ao modelo.
+- Se um parágrafo for recusado pela verificação nas duas tentativas, fica o texto revisado, sem limpeza, e a etapa registra um aviso. Na dúvida, entra a fala como foi dita.
 - O código monta `clean/audio-NN.md` com o cabeçalho do prompt original (`arquivo`, `duração`, `qualidade`).
 - **Verificação `limpeza` (nova, só código):** cada palavra do parágrafo limpo precisa existir no parágrafo bruto correspondente, exceto as marcas `[?…]`. Palavra nova é erro (o prompt proíbe trocar palavras). Parágrafo limpo com menos da metade das palavras do bruto vira aviso (possível resumo). Isso cobre o critério do RF4.
 
