@@ -18,8 +18,8 @@ export type RespostaScribe = {
 
 /** Pausa (s) que abre um parágrafo novo. */
 export const PAUSA_PARAGRAFO = 1.5;
-/** Palavras com logprob abaixo disto viram [?palavra] (probabilidade < ~37%). A calibrar. */
-export const LIMIAR_DUVIDA = -1.0;
+/** Palavras com logprob abaixo disto viram [?palavra] (probabilidade < ~60%). Calibrado no S24: um nome próprio errado ("Meping" por "Mappin") veio com -0,66. */
+export const LIMIAR_DUVIDA = -0.5;
 const PALAVRAS_POR_PARAGRAFO = 120;
 
 export type Paragrafo = { inicio: number; texto: string };
