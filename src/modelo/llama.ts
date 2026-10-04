@@ -1,6 +1,6 @@
 // ModeloLocal sobre o llama.rn (docs/harness-fatia.md, "Interface ModeloLocal").
 // Um modelo residente por vez; a saída é presa ao esquema por gramática (json_schema).
-import { initLlama, type LlamaContext } from 'llama.rn';
+import { initLlama, type LlamaContext, releaseAllLlama } from 'llama.rn';
 import type { ModeloLocal, Pedido } from '../harness/modelo';
 
 export type Medida = {
@@ -22,6 +22,9 @@ export class ModeloLlama implements ModeloLocal {
 
   async carregar(onProgresso?: (p: number) => void): Promise<void> {
     if (this.contexto) return;
+    // Um modelo residente por vez: solta qualquer contexto que tenha ficado para trás
+    // (por exemplo, depois de recarregar o JavaScript) antes de ocupar mais 3 GB.
+    await releaseAllLlama();
     this.contexto = await initLlama(
       {
         model: this.caminhoModelo,

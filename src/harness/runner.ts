@@ -284,7 +284,7 @@ export class Runner {
       const textoAtomos = ids
         .map((id) => {
           const a = atomos[id];
-          return `${id} | ${a.tipo} | ${a.fonte}\nresumo: ${a.resumo}\ntrecho: ${a.trecho_literal}`;
+          return `${id} | ${a.tipo} | ${a.fonte}\ntrecho: ${a.trecho_literal}`;
         })
         .join('\n\n');
       const contradicoes: [string, string][] = [];

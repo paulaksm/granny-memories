@@ -258,6 +258,8 @@ async function comModelo<T>(tipo: Tarefa['tipo'], alvo: string, fn: (r: Runner) 
     mudar({ erro: e instanceof Error ? e.message : String(e) });
     throw e;
   } finally {
+    // Devolve a memória ao sistema entre tarefas (aparelhos de 8 GB).
+    await modeloCompartilhado().liberar().catch(() => {});
     mudar({ tarefa: null });
   }
 }
