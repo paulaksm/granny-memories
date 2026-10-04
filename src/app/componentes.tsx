@@ -2,6 +2,7 @@
 import { AudioLines, ChevronLeft, Lock, Smartphone } from 'lucide-react-native';
 import { type ReactNode, useEffect, useState } from 'react';
 import {
+  KeyboardAvoidingView,
   Modal,
   Pressable,
   ScrollView,
@@ -310,6 +311,7 @@ export function Folha({
   const ins = useSafeAreaInsets();
   return (
     <Modal visible={visivel} transparent animationType="slide" onRequestClose={onFechar} statusBarTranslucent>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
       <Pressable style={e.scrim} onPress={onFechar} accessibilityLabel="Fechar" />
       <View style={[e.folha, { paddingBottom: espaco[5] + ins.bottom }]}>
         <View style={e.alca} />
@@ -318,6 +320,7 @@ export function Folha({
           {children}
         </ScrollView>
       </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }
