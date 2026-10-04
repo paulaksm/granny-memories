@@ -41,7 +41,7 @@ Itens que o `.gitignore` deve sempre bloquear: `.env*` (exceto `.env.example`), 
 
 - 13 agentes: limpeza, extrator de átomos, mapeador de temas, analista de voz, arquiteto de estrutura, sugestor de temas, redator de capítulos, revisor de capítulo, atualizador do guia de voz, revisor de conjunto (por lente), redator editorial, entrevistador e maestro.
 - System prompts: `docs/prompts-agentes-ghostwriter.md`. Todos incluem o bloco comum (neutralidade e fidelidade). Os formatos de arquivo descritos lá são lidos pelos scripts, então siga-os exatamente.
-- Scripts de verificação sem modelo de linguagem: `atomos`, `rastreio`, `montar`, `gate`. A versão de referência em Python está em `reference/python/harness.py`, com 26 testes em `test_harness.py`. A portagem para TypeScript deve passar nos mesmos casos de teste.
+- Scripts de verificação sem modelo de linguagem: `atomos`, `rastreio`, `montar`, `gate`. A versão de referência em Python está em `reference/python/harness.py`, com 26 testes em `test_harness.py`. A portagem para TypeScript deve passar nos mesmos casos de teste. Exceção aprovada para o prazo: a fatia porta só `atomos` e `rastreio` e seus 10 testes; montador, gate e CLI ficam para depois.
 - O projeto do livro (dados da autora) segue esta estrutura, sempre fora do Git: `transcricoes/raw|clean`, `notas/atoms`, `notas/temas.md`, `livro/outline.md`, `livro/capitulos`, `voz/guia-de-voz.md`, `controle/decisoes.md`, `controle/perguntas.md`, `fechamento/`.
 
 ## Convenções de trabalho
