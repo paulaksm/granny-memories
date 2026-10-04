@@ -20,7 +20,8 @@ Uma sequência fixa em TypeScript, sem agente orquestrador (decisão de 2026-10-
 |---|---|---|---|---|---|
 | 1 | Importar | código | áudio gravado ou escolhido | `audios/audio-NN.<ext>` + hash | hash gravado; o arquivo nunca é sobrescrito |
 | 2 | Transcrever | Scribe v2 | áudio | `transcricoes/raw/audio-NN.json` (resposta original) e `audio-NN.txt` | parágrafos com `[mm:ss]` |
-| 3 | Limpar | modelo (limpeza) | `raw/audio-NN.txt` | `transcricoes/clean/audio-NN.md` | `limpeza` (nova, abaixo) |
+| — | **Pausa: a autora corrige as palavras `[?]`** | autora | `raw/audio-NN.txt` | `transcricoes/revisada/audio-NN.txt` | `raw/` intacto |
+| 3 | Limpar | modelo (limpeza) | `revisada/audio-NN.txt` | `transcricoes/clean/audio-NN.md` | `limpeza` (nova, abaixo) |
 | 4 | Extrair átomos | modelo (extrator) | `clean/audio-NN.md` | `notas/atoms/A-NNN.md` | `atomos` |
 | 5 | Perfil de voz | código + modelo (analista) | todas as `clean/` | `voz/guia-de-voz.md` (rascunho) | trechos conferidos por código |
 | — | **Pausa: a autora aprova ou recusa cada traço** | autora | | `guia-de-voz.md` com status por traço | |
@@ -42,6 +43,14 @@ Regras do runner:
 - `POST /v1/speech-to-text`, `model_id=scribe_v2`, sem `language_code` (detecção automática), cabeçalho `xi-api-key` lido do armazenamento seguro.
 - A resposta JSON vai inteira para `raw/audio-NN.json`, imutável.
 - `raw/audio-NN.txt` é derivado por código: palavras agrupadas em parágrafos por pausa (≥ 1,5 s entre palavras), cada parágrafo começando com `[mm:ss]` do primeiro termo.
+- Palavras com baixa confiança do Scribe (probabilidade abaixo de um limite a calibrar) saem como `[?palavra]` no `.txt`.
+
+### Correção mínima (RF3 mínimo)
+
+- A tela mostra o texto com as marcas `[?]`. A autora toca, ouve o trecho e digita a palavra certa.
+- As correções ficam em `transcricoes/revisada/audio-NN.txt` (cópia do bruto com as palavras trocadas). `raw/` nunca muda.
+- "Está certo, continuar" aceita as marcas não corrigidas como estão; a limpeza preserva `[?]` e o átomo fica com `confianca_transcricao: baixa`.
+- Na verificação `limpeza`, o texto de referência passa a ser o revisado.
 
 ### 3. Limpeza
 
@@ -128,7 +137,7 @@ A mesma estrutura do harness, dentro de `documentDirectory/projeto/` (expo-file-
 
 ## Fora da fatia
 
-Maestro, revisão da transcrição (RF3), mapeador de temas, arquiteto de estrutura, revisor de capítulo, edição e aprovação do capítulo (RF10), atualizador do guia, montador, gate e exportação.
+Maestro, revisão completa da transcrição (RF3 além da correção de `[?]`), mapeador de temas, arquiteto de estrutura, revisor de capítulo, edição e aprovação do capítulo (RF10), atualizador do guia, montador, gate e exportação.
 
 ## Seções do PRD afetadas
 

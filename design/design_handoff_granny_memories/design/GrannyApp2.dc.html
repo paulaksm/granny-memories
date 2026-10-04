@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>body{margin:0;background:#F6EFEC}a{color:#8A3F14}a:hover{color:#C56127}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #C56127;outline-offset:2px}input::placeholder,textarea::placeholder{color:#7F6866}</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#F6EFEC;color:#2E2322;font-family:'Atkinson Hyperlegible',system-ui,sans-serif;display:flex;flex-direction:column">
+
+<div style="height:32px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 20px 0 24px;font-size:15px;font-weight:700;position:relative">
+<span>9:30</span>
+<span style="position:absolute;left:50%;top:9px;width:12px;height:12px;margin-left:-6px;border-radius:999px;background:#2E2322"></span>
+<span style="display:flex;gap:6px;align-items:center"><span style="width:15px;height:11px;background:#2E2322;clip-path:polygon(0 100%,100% 0,100% 100%)"></span><span style="width:22px;height:11px;border:1.5px solid #2E2322;border-radius:3px;padding:1px;display:flex;box-sizing:border-box"><span style="width:70%;background:#2E2322;border-radius:1px"></span></span></span>
+</div>
+
+<div style="flex:1;min-height:0;position:relative;display:flex;flex-direction:column">
+
+<sc-if value="{{ isLibrary }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="padding:12px 16px 4px 24px;display:flex;align-items:center;justify-content:space-between">
+<span style="font-family:'Literata',Georgia,serif;font-style:italic;font-size:18px;color:#8A3F14">Granny Memories</span>
+<button onClick="{{ goConfig }}" style="height:48px;display:flex;align-items:center;gap:8px;padding:0 14px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex:none"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path><circle cx="16" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg>Ajustes</button>
+</div>
+<div style="padding:4px 24px 16px"><h1 style="margin:0;font-size:32px;line-height:38px;font-weight:700">Meus livros</h1></div>
+<div style="flex:1;min-height:0;overflow-y:auto">
+<div style="padding:0 24px 32px;display:flex;flex-direction:column;gap:12px">
+<sc-if value="{{ hasBook }}" hint-placeholder-val="{{ true }}"><button onClick="{{ openBook }}" style="display:flex;gap:18px;align-items:center;width:100%;padding:18px;border:1px solid #E4D5D2;border-radius:18px;background:#FCF8F6;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#FFFFFF" style-active="background:#EFE4E1">
+<span style="width:76px;height:104px;flex:none;box-sizing:border-box;border-radius:3px 10px 10px 3px;background:#007190;color:#FCF8F6;display:flex;flex-direction:column;justify-content:space-between;padding:12px 10px 12px 14px;box-shadow:inset 5px 0 0 rgba(0,0,0,.14)"><span style="font-family:'Literata',Georgia,serif;font-size:15px;line-height:18px;font-weight:600">{{ bookTitle }}</span><span style="width:22px;height:2px;background:#FCF8F6;opacity:.75"></span></span>
+<span style="flex:1;display:flex;flex-direction:column;gap:6px;min-width:0">
+<span style="font-family:'Literata',Georgia,serif;font-size:24px;line-height:30px;font-weight:600">{{ bookTitle }}</span>
+<span style="font-size:16px;line-height:22px;color:#66504F">{{ bookMeta }}</span>
+<span style="font-size:16px;font-weight:700;color:#8A3F14">Abrir o livro</span>
+</span>
+<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#66504F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M9 6l6 6-6 6"></path></svg>
+</button></sc-if>
+<sc-if value="{{ noBook }}" hint-placeholder-val="{{ false }}"><p style="margin:0 0 4px;font-family:'Literata',Georgia,serif;font-size:22px;line-height:31px">Você ainda não tem livros.</p></sc-if>
+<button onClick="{{ onNewBook }}" style="height:56px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:2px dashed #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M12 5v14M5 12h14"></path></svg>Começar um livro novo</button>
+</div>
+<div style="padding:0 24px 32px;display:flex;flex-direction:column;gap:6px">
+<h2 style="margin:0;font-size:20px;line-height:26px;font-weight:700">Rascunhos sem livro</h2>
+<p style="margin:0 0 8px;font-size:16px;line-height:23px;color:#66504F">Áudios que ainda não estão em nenhum livro.</p>
+<sc-for list="{{ drafts }}" as="d" hint-placeholder-count="1">
+<div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding:14px 0 6px;border-top:1px solid #E4D5D2">
+<span style="display:flex;flex-direction:column;gap:4px"><span style="font-size:15px;color:#66504F">{{ d.label }} · {{ d.dur }} · {{ d.st }}</span><span style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:28px;font-weight:600">{{ d.name }}</span></span>
+<button onClick="{{ d.onToBook }}" style="height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;border:2px solid #8E716F;border-radius:12px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;flex:none"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M5 17a3 3 0 0 1 3-3h11"></path></svg>Guardar em um livro</button>
+</div>
+</sc-for>
+<sc-if value="{{ noDrafts }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:14px 0;border-top:1px solid #E4D5D2;font-size:17px;line-height:24px;color:#66504F">Nenhum rascunho solto agora.</p></sc-if>
+</div>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;display:flex;flex-direction:column;gap:10px;background:#F6EFEC">
+<button onClick="{{ openWhere }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer;height:64px;font-size:20px" style-hover="background:#B2571F" style-active="background:#A3501F"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>Gravar uma história</button>
+<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:#EFE4E1;color:#4F3D3C;font-size:15px;line-height:21px"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex:none"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>Seus textos ficam no seu celular. Só o áudio é enviado para ser transcrito.</span></div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isBook }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0 8px"><button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button><button aria-label="Conversar com a ghost writer" title="Conversar com a ghost writer" style="width:48px;height:48px;border-radius:999px;border:1.5px solid #CDB8B6;background:transparent;color:#66504F;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 5h16v11H10l-6 4z"></path></svg></button></div>
+<div style="flex:1;min-height:0;overflow-y:auto">
+<div style="padding:8px 24px 18px">
+<div style="font-size:15px;font-weight:700;color:#8A3F14">Livro</div>
+<div style="display:flex;align-items:flex-start;gap:12px;margin:4px 0 4px"><h1 style="margin:0;flex:1;min-width:0;font-family:'Literata',Georgia,serif;font-size:30px;line-height:38px;font-weight:600;text-wrap:pretty">{{ bookTitle }}</h1><button onClick="{{ openTitle }}" aria-label="Editar o título do livro" title="Editar o título" style="width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;border:2px solid #8E716F;border-radius:12px;background:transparent;color:#2E2322;cursor:pointer" style-hover="background:#EDE1DE" style-active="background:#E4D5D2"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;flex:none"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button></div>
+<span style="font-size:16px;line-height:22px;color:#66504F">{{ bookMeta }}</span>
+</div>
+<div style="padding:0 24px 20px">
+<button onClick="{{ openPreview }}" style="display:flex;gap:16px;align-items:center;width:100%;padding:16px 18px;border:1px solid #E4D5D2;border-radius:18px;background:#FCF8F6;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#FFFFFF" style-active="background:#EFE4E1">
+<span style="width:54px;height:70px;flex:none;box-sizing:border-box;border-radius:3px;background:#FFFCFB;border:1px solid #E4D5D2;box-shadow:3px 3px 0 #E4D5D2;padding:10px 8px;display:flex;flex-direction:column;gap:5px"><span style="font-family:'Literata',Georgia,serif;font-size:15px;line-height:15px;color:#C56127;font-weight:600">T</span><span style="height:2px;background:#CDB8B6"></span><span style="height:2px;background:#CDB8B6"></span><span style="height:2px;width:70%;background:#CDB8B6"></span></span>
+<span style="flex:1;display:flex;flex-direction:column;gap:4px"><span style="font-size:19px;line-height:24px;font-weight:700">Ver prévia do livro</span><span style="font-size:16px;line-height:22px;color:#66504F">Como o livro está hoje, na sua voz.</span></span>
+<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#66504F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+</div>
+<div style="padding:0 24px 18px">
+<div role="tablist" style="height:52px;box-sizing:border-box;padding:4px;border-radius:14px;background:#ECE0DE;display:flex;gap:4px">
+<sc-if value="{{ isTimelineView }}" hint-placeholder-val="{{ true }}">
+<button role="tab" aria-selected="true" style="flex:1;border:0;border-radius:10px;background:#FCF8F6;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;box-shadow:0 1px 3px rgba(46,35,34,.15);cursor:pointer">Linha do tempo</button>
+<button role="tab" onClick="{{ showChapters }}" style="flex:1;border:0;border-radius:10px;background:transparent;color:#4F3D3C;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#E4D5D2">Capítulos</button>
+</sc-if>
+<sc-if value="{{ isChaptersView }}" hint-placeholder-val="{{ false }}">
+<button role="tab" onClick="{{ showTimeline }}" style="flex:1;border:0;border-radius:10px;background:transparent;color:#4F3D3C;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#E4D5D2">Linha do tempo</button>
+<button role="tab" aria-selected="true" style="flex:1;border:0;border-radius:10px;background:#FCF8F6;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;box-shadow:0 1px 3px rgba(46,35,34,.15);cursor:pointer">Capítulos</button>
+</sc-if>
+</div>
+</div>
+<sc-if value="{{ isTimelineView }}" hint-placeholder-val="{{ true }}">
+<div style="padding:0 24px 28px;display:flex;flex-direction:column">
+<p style="margin:0 0 10px;font-size:16px;line-height:23px;color:#66504F">Na ordem em que você gravou.</p>
+<sc-for list="{{ timeline }}" as="a" hint-placeholder-count="2">
+<div style="display:flex;gap:16px">
+<span style="width:20px;flex:none;display:flex;flex-direction:column;align-items:center;padding-top:20px">
+<sc-if value="{{ a.isPronto }}"><span style="width:16px;height:16px;border-radius:999px;background:#6D7E77;flex:none"></span></sc-if><sc-if value="{{ a.isTrans }}"><span style="width:16px;height:16px;border-radius:999px;background:#007190;box-shadow:0 0 0 5px #DCEEF3;flex:none"></span></sc-if><sc-if value="{{ a.isFila }}"><span style="width:16px;height:16px;border-radius:999px;border:3px solid #8E716F;box-sizing:border-box;background:#F6EFEC;flex:none"></span></sc-if>
+<span style="flex:1;width:2px;background:#E4D5D2;margin-top:6px;min-height:40px"></span>
+</span>
+<div style="flex:1;min-width:0;padding:6px 0 22px;display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+<button onClick="{{ a.onOpen }}" style="min-height:48px;padding:4px 0;border:0;background:transparent;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;gap:2px;border-radius:8px" style-hover="background:#EFE4E1"><span style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:28px;font-weight:600">{{ a.name }}</span><span style="font-size:16px;line-height:22px;color:#66504F">{{ a.label }} · {{ a.dur }} · {{ a.st }}</span></button>
+<sc-if value="{{ a.hasChapter }}"><button onClick="{{ a.onAssign }}" style="min-height:48px;display:inline-flex;align-items:center;gap:8px;padding:0 14px;border:2px solid #8E716F;border-radius:12px;background:transparent;color:#2E2322;font:700 16px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;flex:none"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M5 17a3 3 0 0 1 3-3h11"></path></svg>{{ a.chapterLabel }}</button></sc-if>
+<sc-if value="{{ a.noChapter }}"><button onClick="{{ a.onAssign }}" style="min-height:48px;display:inline-flex;align-items:center;gap:8px;padding:0 14px;border:2px dashed #C56127;border-radius:12px;background:#F6E1D3;color:#8A3F14;font:700 16px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#F0D2BE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M12 5v14M5 12h14"></path></svg>Escolher o capítulo</button></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ isChaptersView }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 24px 28px;display:flex;flex-direction:column;gap:28px">
+<p style="margin:0;font-size:16px;line-height:23px;color:#66504F">Use as setas para mudar a ordem dos áudios dentro da história.</p>
+<sc-for list="{{ chapters }}" as="c" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column">
+<div style="font-size:15px;font-weight:700;color:#8A3F14">{{ c.kicker }}</div>
+<h2 style="margin:2px 0 10px;font-family:'Literata',Georgia,serif;font-size:23px;line-height:30px;font-weight:600">{{ c.title }}</h2>
+<sc-for list="{{ c.items }}" as="a" hint-placeholder-count="1">
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #E4D5D2">
+<span style="width:34px;height:34px;flex:none;border-radius:999px;background:#2E2322;color:#F6EFEC;font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ a.pos }}</span>
+<button onClick="{{ a.onOpen }}" style="flex:1;min-width:0;min-height:48px;padding:4px 0;border:0;background:transparent;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Literata',Georgia,serif;font-size:19px;line-height:25px;font-weight:600">{{ a.name }}</span><span style="font-size:15px;line-height:20px;color:#66504F">{{ a.label }} · {{ a.st }}</span></button>
+<sc-if value="{{ a.canMove }}"><button onClick="{{ a.onUp }}" aria-label="Subir na ordem" style="width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;border:2px solid #8E716F;border-radius:12px;background:#FCF8F6;color:#2E2322;cursor:pointer;opacity:{{ a.upOpacity }}" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button><button onClick="{{ a.onDown }}" aria-label="Descer na ordem" style="width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;border:2px solid #8E716F;border-radius:12px;background:#FCF8F6;color:#2E2322;cursor:pointer;opacity:{{ a.downOpacity }}" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></button></sc-if>
+<sc-if value="{{ a.cantMove }}"><button onClick="{{ a.onAssign }}" style="height:48px;flex:none;padding:0 12px;border:2px dashed #C56127;border-radius:12px;background:#F6E1D3;color:#8A3F14;font:700 16px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer">Escolher</button></sc-if>
+</div>
+</sc-for>
+<sc-if value="{{ c.empty }}"><p style="margin:0;padding:12px 0;border-top:1px solid #E4D5D2;font-size:16px;color:#66504F">Nenhum áudio neste capítulo ainda.</p></sc-if>
+</div>
+</sc-for>
+<button onClick="{{ onNewChapter }}" style="height:56px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:2px dashed #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M12 5v14M5 12h14"></path></svg>Novo capítulo</button>
+</div>
+</sc-if>
+<div style="padding:16px 24px 32px;border-top:1px solid #E4D5D2;margin-top:8px"><button onClick="{{ openDelete }}" style="height:56px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:2px solid #9A2E22;border-radius:14px;background:transparent;color:#9A2E22;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#F5DAD3" style-active="background:#EFC9C0"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"></path></svg>Excluir este livro</button></div>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;background:#F6EFEC">
+<button onClick="{{ onRecordBook }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>Gravar para este livro</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;background:#EADCDA">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0 8px"><button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button><span style="font-size:17px;font-weight:700;padding-right:8px">Prévia do livro</span></div>
+<div style="flex:1;min-height:0;padding:8px 18px 14px;display:flex">
+<sc-for list="{{ pageItems }}" as="pg" hint-placeholder-count="1">
+<div style="flex:1;min-width:0;background:#FFFCFB;border-radius:4px 10px 10px 4px;box-shadow:0 2px 0 #DCCAC7,0 6px 18px rgba(46,35,34,.14);display:flex;flex-direction:column;overflow:hidden">
+<div style="flex:none;display:flex;justify-content:space-between;padding:16px 24px 0;font-family:'Literata',Georgia,serif;font-style:italic;font-size:15px;color:#66504F"><span>{{ bookTitle }}</span><span>{{ pg.label }}</span></div>
+<div style="flex:1;min-height:0;overflow-y:auto;padding:20px 24px 24px;display:flex;flex-direction:column">
+<sc-if value="{{ pg.isCover }}">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px;padding-bottom:40px">
+<span style="font-size:15px;font-weight:700;color:#8A3F14">Prévia de hoje</span>
+<h2 style="margin:0;font-family:'Literata',Georgia,serif;font-size:46px;line-height:52px;font-weight:600">{{ bookTitle }}</h2>
+<span style="width:48px;height:3px;background:#C56127"></span>
+<p style="margin:0;font-family:'Literata',Georgia,serif;font-style:italic;font-size:20px;line-height:31px;color:#4F3D3C">Escrito a partir dos seus áudios, na sua voz.</p>
+<span style="font-size:16px;color:#66504F">{{ bookMeta }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ pg.isToc }}">
+<div style="display:flex;flex-direction:column;gap:4px">
+<h2 style="margin:0 0 16px;font-family:'Literata',Georgia,serif;font-size:30px;line-height:38px;font-weight:600">Sumário</h2>
+<sc-for list="{{ pg.rows }}" as="r" hint-placeholder-count="2">
+<button onClick="{{ r.onGo }}" style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;width:100%;padding:14px 0;border:0;border-top:1px solid #E4D5D2;background:transparent;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#F6EFEC">
+<span style="display:flex;width:100%;align-items:baseline;gap:8px;font-family:'Literata',Georgia,serif;font-size:20px;line-height:27px"><span style="font-weight:600">{{ r.num }}.</span><span style="flex:1">{{ r.title }}</span><span style="color:#66504F">{{ r.pg }}</span></span>
+<span style="display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;background:#ECE0DE;color:#4F3D3C;font:700 15px/1 'Atkinson Hyperlegible',sans-serif">{{ r.status }}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ pg.isChapter }}">
+<div style="display:flex;flex-direction:column">
+<span style="font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A3F14">Capítulo {{ pg.num }}</span>
+<h2 style="margin:6px 0 22px;font-family:'Literata',Georgia,serif;font-size:28px;line-height:35px;font-weight:600">{{ pg.title }}</h2>
+<sc-for list="{{ pg.blocks }}" as="b" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:flex-start;margin-bottom:10px">
+<sc-if value="{{ b.isDrop }}"><p style="margin:0;font-family:'Literata',Georgia,serif;font-size:19px;line-height:32px;text-wrap:pretty"><span style="float:left;font-size:62px;line-height:54px;padding:4px 8px 0 0;color:#C56127;font-weight:600">{{ b.first }}</span>{{ b.rest }}</p></sc-if>
+<sc-if value="{{ b.isPlain }}"><p style="margin:0;font-family:'Literata',Georgia,serif;font-size:19px;line-height:32px;text-wrap:pretty;text-indent:1.4em">{{ b.text }}</p></sc-if>
+<sc-if value="{{ b.isText }}"><button onClick="{{ b.onOrigin }}" aria-label="Ver a origem do trecho" style="min-height:48px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;clear:both"><span style="display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 10px 0 6px;border-radius:999px;background:#DCEEF3;color:#00586F;font:700 15px/1 'Atkinson Hyperlegible',sans-serif"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex:none"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>{{ b.src }}</span></button></sc-if>
+<sc-if value="{{ b.isGap }}"><div style="width:100%;box-sizing:border-box;margin:4px 0 6px;padding:14px 16px;border-radius:12px;background:#FAEDB5;border:1px solid #E2C866;display:flex;flex-direction:column;gap:8px;clear:both"><span style="font-size:15px;font-weight:700;color:#5C4709">Falta uma parte</span><span style="font-family:'Literata',Georgia,serif;font-size:19px;line-height:28px">Quem cortava o primeiro pedaço?</span><button onClick="{{ goChapter }}" style="align-self:flex-start;height:48px;padding:0 14px;border:2px solid #5C4709;border-radius:12px;background:transparent;color:#3D2F05;font:700 16px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#F3E08F">Responder no capítulo</button></div></sc-if>
+<sc-if value="{{ b.isPending }}"><div style="width:100%;box-sizing:border-box;margin:4px 0 6px;padding:14px 16px;border-radius:12px;background:#F6EFEC;display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:23px;color:#4F3D3C;clear:both"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex:none"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg><span>{{ b.text }}</span></div></sc-if>
+<sc-if value="{{ b.isEmptyCh }}"><p style="margin:0;font-size:17px;line-height:25px;color:#66504F">Este capítulo ainda não tem áudios. Escolha um na linha do tempo do livro.</p></sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="flex:none;text-align:center;padding:0 0 12px;font-family:'Literata',Georgia,serif;font-size:15px;color:#66504F">{{ pg.no }}</div>
+</div>
+</sc-for>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #DCCAC7;background:#F6EFEC;display:flex;gap:10px">
+<button onClick="{{ prevPage }}" style="height:60px;flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:2px solid #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer;opacity:{{ prevOpacity }}" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Anterior</button>
+<button onClick="{{ nextPage }}" style="height:60px;flex:1.6;display:flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer;opacity:{{ nextOpacity }}" style-hover="background:#B2571F" style-active="background:#A3501F">Próxima página<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isTrans }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0 8px">
+<button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button>
+<button aria-label="Conversar com a ghost writer" title="Conversar com a ghost writer" style="width:48px;height:48px;border-radius:999px;border:1.5px solid #CDB8B6;background:transparent;color:#66504F;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 5h16v11H10l-6 4z"></path></svg></button>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto">
+<div style="padding:8px 24px 16px">
+<div style="font-size:15px;font-weight:700;color:#8A3F14">Passo 1 de 4</div>
+<h1 style="margin:4px 0 0;font-size:30px;line-height:36px;font-weight:700">Transcrição</h1>
+<p style="margin:6px 0 0;font-size:17px;line-height:24px;color:#66504F">O que o app ouviu no seu áudio.</p>
+</div>
+<div style="padding:0 24px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+<span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:15px;color:#66504F">Áudio 1 · 0:42</span><span style="font-family:'Literata',Georgia,serif;font-size:19px;font-weight:600">O bolo de laranja</span></span>
+<button onClick="{{ onPlay }}" style="height:48px;flex:none;display:flex;align-items:center;gap:8px;padding:0 16px;border:2px solid #8E716F;border-radius:999px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:currentColor"><path d="M8 5v14l11-7z"></path></svg>{{ playLabel }}</button>
+</div>
+<sc-if value="{{ notCorrected }}" hint-placeholder-val="{{ true }}">
+<div style="margin:0 24px 20px;padding:14px 16px;border-radius:14px;background:#F6E1D3;color:#6E3210;display:flex;flex-direction:column;gap:10px">
+<span style="font-size:17px;line-height:24px">Uma palavra não ficou clara. Toque nela para corrigir.</span>
+<button onClick="{{ openFix }}" style="align-self:flex-start;height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;border:0;border-radius:12px;background:#FCF8F6;color:#6E3210;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#FFFFFF"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg>Corrigir a palavra</button>
+</div>
+</sc-if>
+<sc-if value="{{ isCorrected }}" hint-placeholder-val="{{ false }}">
+<div style="margin:0 24px 20px;padding:14px 16px;border-radius:14px;background:#E3E9E6;color:#34413C;display:flex;gap:10px;align-items:center;font-size:17px;line-height:24px"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M5 12l5 5L20 7"></path></svg>Palavra corrigida. Confira o resto e continue.</div>
+</sc-if>
+<p style="margin:0;padding:0 24px 32px;font-family:'Literata',Georgia,serif;font-size:21px;line-height:36px;text-wrap:pretty">Toda sexta-feira a casa cheirava a laranja. Era dia de bolo. Eu ficava na porta da cozinha esperando a minha avó tirar a forma do forno, e ela sempre dizia que ainda não estava no ponto. <sc-if value="{{ notCorrected }}" hint-placeholder-val="{{ true }}"><button onClick="{{ openFix }}" style="display:inline;font:inherit;padding:2px 10px;margin:0 2px;background:#F6E1D3;color:#8A3F14;border:0;border-bottom:2px dashed #C56127;border-radius:6px 6px 0 0;cursor:pointer" style-hover="background:#F0D2BE">[?]</button></sc-if><sc-if value="{{ isCorrected }}" hint-placeholder-val="{{ false }}"><button onClick="{{ openFix }}" style="display:inline;font:inherit;padding:2px 6px;margin:0 2px;background:#E3E9E6;color:#2E2322;border:0;border-bottom:2px solid #6D7E77;border-radius:6px 6px 0 0;cursor:pointer">{{ correctedWord }}</button></sc-if> cortava o primeiro pedaço para mim.</p>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;background:#F6EFEC">
+<button onClick="{{ goIdeas }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Está certo, continuar</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isVoice }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0 8px"><button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button><button aria-label="Conversar com a ghost writer" title="Conversar com a ghost writer" style="width:48px;height:48px;border-radius:999px;border:1.5px solid #CDB8B6;background:transparent;color:#66504F;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 5h16v11H10l-6 4z"></path></svg></button></div>
+<div style="flex:1;min-height:0;overflow-y:auto">
+<div style="padding:8px 24px 18px">
+<div style="font-size:15px;font-weight:700;color:#8A3F14">{{ voiceStep }}</div>
+<h1 style="margin:4px 0 0;font-size:30px;line-height:36px;font-weight:700;text-wrap:pretty">Como você conta suas histórias</h1>
+<p style="margin:8px 0 0;font-size:17px;line-height:24px;color:#66504F">{{ voiceSub }}</p>
+</div>
+<sc-if value="{{ fewData }}" hint-placeholder-val="{{ false }}">
+<div style="margin:0 24px 18px;padding:14px 16px;border-radius:14px;background:#EFE4E1;color:#4F3D3C;display:flex;gap:10px;align-items:flex-start;font-size:17px;line-height:24px"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex:none"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg><span>Com um áudio só, ainda é um palpite. Confirme o que for seu.</span></div>
+</sc-if>
+<div style="padding:0 24px 32px;display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ traits }}" as="t" hint-placeholder-count="3">
+<div style="border:2px solid {{ t.border }};border-radius:18px;background:#FCF8F6;padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-direction:column;gap:10px;opacity:{{ t.dim }}">
+<div style="display:flex;align-items:center;justify-content:space-between;min-height:28px;gap:8px">
+<span style="font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8A3F14">{{ t.name }}</span>
+<sc-if value="{{ t.isYes }}"><span style="display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 10px 0 6px;border-radius:999px;background:#C56127;color:#FFFFFF;font-size:15px;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M5 12l5 5L20 7"></path></svg>É você</span></sc-if>
+</div>
+<p style="margin:0;font-size:18px;line-height:26px">{{ t.trait }}</p>
+<p style="margin:4px 0 0;font-family:'Literata',Georgia,serif;font-size:23px;line-height:35px;text-wrap:pretty">“{{ t.quote }}”</p>
+<button onClick="{{ t.onOrigin }}" aria-label="Ouvir o trecho original" style="align-self:flex-start;min-height:48px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center"><span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font:700 15px/1 'Atkinson Hyperlegible',sans-serif"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>{{ t.src }}</span></button>
+</div>
+<sc-if value="{{ t.isNeutral }}"><div style="display:flex;gap:10px"><button onClick="{{ t.onYes }}" style="height:52px;flex:1;min-width:0;padding:0 8px;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px;border:2px solid #8E716F;border-radius:12px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE" style-active="background:#E4D5D2">Isso sou eu</button><button onClick="{{ t.onNo }}" style="height:52px;flex:1;min-width:0;padding:0 8px;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px;border:2px solid #8E716F;border-radius:12px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE" style-active="background:#E4D5D2">Não sou eu</button></div></sc-if>
+<sc-if value="{{ t.isYes }}"><div style="display:flex;gap:10px"><button onClick="{{ t.onYes }}" aria-pressed="true" style="height:52px;flex:1;min-width:0;padding:0 8px;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px;border:2px solid #C56127;border-radius:12px;background:#C56127;color:#FFFFFF;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Isso sou eu</button><button onClick="{{ t.onNo }}" style="height:52px;flex:1;min-width:0;padding:0 8px;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px;border:2px solid #8E716F;border-radius:12px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE" style-active="background:#E4D5D2">Não sou eu</button></div></sc-if>
+<sc-if value="{{ t.isNo }}"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px"><span style="font-size:17px;line-height:24px;font-weight:700;color:#4F3D3C">Este traço não será usado</span><button onClick="{{ t.onUndo }}" style="min-height:48px;padding:0 8px;border:0;border-radius:10px;background:transparent;color:#8A3F14;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer" style-hover="background:#F6E1D3">Desfazer</button></div></sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;background:#F6EFEC">
+<button onClick="{{ useVoice }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Usar meu jeito de contar</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isIdeas }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0 8px">
+<button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button>
+<button aria-label="Conversar com a ghost writer" title="Conversar com a ghost writer" style="width:48px;height:48px;border-radius:999px;border:1.5px solid #CDB8B6;background:transparent;color:#66504F;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 5h16v11H10l-6 4z"></path></svg></button>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto">
+<div style="padding:8px 24px 16px">
+<div style="font-size:15px;font-weight:700;color:#8A3F14">Passo 3 de 4</div>
+<h1 style="margin:4px 0 0;font-size:30px;line-height:36px;font-weight:700">Ideias</h1>
+<p style="margin:6px 0 0;font-size:17px;line-height:24px;color:#66504F">O app separou 3 ideias. Toque em uma para ver o trecho original.</p>
+</div>
+<div style="padding:0 24px 32px;display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ ideas }}" as="it" hint-placeholder-count="3">
+<div style="border:1px solid #E4D5D2;border-radius:18px;background:#FCF8F6;overflow:hidden">
+<button onClick="{{ it.onToggle }}" aria-expanded="{{ it.expanded }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;width:100%;padding:18px 20px;border:0;background:transparent;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#FFFFFF">
+<span style="display:flex;width:100%;align-items:center;justify-content:space-between">
+<span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:999px;background:#ECE0DE;color:#4F3D3C;font-size:15px;font-weight:700">{{ it.type }}</span>
+<span style="font-size:15px;font-weight:700;color:#66504F">{{ it.hint }}</span>
+</span>
+<span style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:30px;text-wrap:pretty">{{ it.text }}</span>
+<span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>{{ it.src }}</span>
+</button>
+<sc-if value="{{ it.expanded }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 20px 18px;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:15px;font-weight:700;color:#66504F">Trecho original</span>
+<p style="margin:0;padding:14px 16px;border-radius:12px;background:#F6EFEC;font-family:'Literata',Georgia,serif;font-style:italic;font-size:19px;line-height:30px">“{{ it.orig }}”</p>
+<button onClick="{{ onPlay }}" style="align-self:flex-start;height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;border:2px solid #8E716F;border-radius:999px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:currentColor"><path d="M8 5v14l11-7z"></path></svg>{{ playLabel }}</button>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;background:#F6EFEC">
+<button onClick="{{ goWrite }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg>Escrever o capítulo</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isChapter }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0 8px">
+<button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button>
+<button aria-label="Conversar com a ghost writer" title="Conversar com a ghost writer" style="width:48px;height:48px;border-radius:999px;border:1.5px solid #CDB8B6;background:transparent;color:#66504F;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 5h16v11H10l-6 4z"></path></svg></button>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto">
+<div style="padding:8px 24px 20px">
+<div style="font-size:15px;font-weight:700;color:#8A3F14">Passo 4 de 4 · Capítulo</div>
+<h1 style="margin:6px 0 10px;font-family:'Literata',Georgia,serif;font-size:30px;line-height:38px;font-weight:600">O bolo de laranja</h1>
+<button onClick="{{ openVoiceFromChapter }}" style="min-height:48px;margin:-6px 0 4px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center"><span style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 8px;border-radius:999px;background:#EFE4E1;color:#4F3D3C;font:700 15px/1 'Atkinson Hyperlegible',sans-serif" style-hover="background:#E4D5D2"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M20 4c-7 1-12 6-13 13l-2 3"></path><path d="M9 14c3 0 6-2 7-5"></path></svg>Escrito no seu jeito de contar</span></button>
+<sc-if value="{{ approved }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#E3E9E6;color:#3F4D47;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;background:#6D7E77"></span>Aprovado</span></sc-if>
+<sc-if value="{{ notApproved }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#ECE0DE;color:#66504F;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;border:2px solid #66504F;box-sizing:border-box"></span>Rascunho</span></sc-if>
+</div>
+<sc-if value="{{ approved }}" hint-placeholder-val="{{ false }}">
+<div style="margin:0 24px 20px;padding:14px 16px;border-radius:14px;background:#E3E9E6;color:#34413C;display:flex;gap:10px;align-items:center;font-size:17px;line-height:24px"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M5 12l5 5L20 7"></path></svg>Capítulo aprovado. Ele já faz parte do seu livro.</div>
+</sc-if>
+<sc-if value="{{ chapterHint }}" hint-placeholder-val="{{ true }}"><p style="margin:0 24px 20px;font-size:16px;line-height:23px;color:#66504F">Toque em um selo para ver de onde veio cada trecho.</p></sc-if>
+<sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}"><p style="margin:0 24px 20px;font-size:16px;line-height:23px;color:#66504F">Mude o que quiser. O selo de origem continua junto de cada trecho.</p></sc-if>
+<div style="padding:0 24px 32px;display:flex;flex-direction:column;gap:22px">
+<sc-for list="{{ passages }}" as="p" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+<sc-if value="{{ p.reading }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-family:'Literata',Georgia,serif;font-size:21px;line-height:35px;text-wrap:pretty;max-width:34em">{{ p.text }}</p></sc-if>
+<sc-if value="{{ p.editing }}" hint-placeholder-val="{{ false }}"><textarea value="{{ p.draft }}" onChange="{{ p.onDraft }}" rows="4" style="width:100%;box-sizing:border-box;padding:12px 14px;border:2px solid #8E716F;border-radius:12px;background:#FCF8F6;color:#2E2322;font-family:'Literata',Georgia,serif;font-size:20px;line-height:32px;resize:vertical"></textarea></sc-if>
+<button onClick="{{ p.onOrigin }}" style="min-height:48px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center" aria-label="Ver a origem do trecho"><span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font:700 15px/1 'Atkinson Hyperlegible',sans-serif" style-hover="background:#F0D2BE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>{{ p.src }}</span></button>
+</div>
+</sc-for>
+<sc-if value="{{ gapOpen }}" hint-placeholder-val="{{ true }}">
+<div style="padding:18px;border-radius:16px;background:#FAEDB5;border:1px solid #E2C866;display:flex;flex-direction:column;gap:12px">
+<span style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:#5C4709"><span style="width:24px;height:24px;border-radius:999px;background:#5C4709;color:#FAEDB5;display:flex;align-items:center;justify-content:center;font-size:15px">?</span>Falta uma parte</span>
+<span style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:30px;font-weight:600">Quem cortava o primeiro pedaço?</span><span style="font-size:17px;line-height:24px;color:#4F3D3C">No áudio, essa palavra não ficou clara.</span></span>
+<input value="{{ gapDraft }}" onChange="{{ onGapDraft }}" placeholder="Escreva sua resposta" aria-label="Sua resposta" style="height:56px;box-sizing:border-box;width:100%;padding:0 16px;border:2px solid #8E716F;border-radius:12px;background:#FFFCFB;color:#2E2322;font:400 19px/1 'Atkinson Hyperlegible',sans-serif">
+<button onClick="{{ saveGap }}" disabled="{{ gapEmpty }}" style="height:52px;display:flex;align-items:center;justify-content:center;width:100%;border:2px solid #5C4709;border-radius:12px;background:transparent;color:#3D2F05;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#F3E08F">Guardar resposta</button>
+</div>
+</sc-if>
+</div>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;background:#F6EFEC">
+<sc-if value="{{ chapterActions }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:10px">
+<button onClick="{{ startEdit }}" style="height:60px;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:2px solid #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg>Editar</button>
+<button onClick="{{ approve }}" style="height:60px;flex:1.7;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5L20 7"></path></svg>Aprovar capítulo</button>
+</div>
+</sc-if>
+<sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:10px">
+<button onClick="{{ cancelEdit }}" style="height:60px;flex:1;border:2px solid #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Cancelar</button>
+<button onClick="{{ saveEdit }}" style="height:60px;flex:1.7;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Salvar alterações</button>
+</div>
+</sc-if>
+<sc-if value="{{ approved }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ goHome }}" style="height:60px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Voltar para o livro</button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isConfig }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;padding:8px 16px 0 8px">
+<button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto">
+<div style="padding:8px 24px 20px"><h1 style="margin:0;font-size:30px;line-height:36px;font-weight:700">Configuração</h1></div>
+<div style="padding:0 24px 32px;display:flex;flex-direction:column;gap:36px">
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<label for="gm-key" style="font-size:19px;line-height:24px;font-weight:700">Chave da ElevenLabs</label>
+<span style="font-size:16px;line-height:23px;color:#66504F">Serve para transcrever seus áudios.</span>
+<div style="display:flex;gap:8px">
+<input id="gm-key" type="{{ keyType }}" value="{{ keyVal }}" onChange="{{ onKey }}" placeholder="Cole a chave aqui" autocomplete="off" style="height:56px;flex:1;min-width:0;box-sizing:border-box;padding:0 16px;border:2px solid #8E716F;border-radius:12px;background:#FCF8F6;color:#2E2322;font:400 19px/1 'Atkinson Hyperlegible',sans-serif;letter-spacing:.04em">
+<button onClick="{{ toggleKey }}" style="height:56px;flex:none;display:flex;align-items:center;gap:6px;padding:0 14px;border:2px solid #8E716F;border-radius:12px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>{{ keyBtn }}</button>
+</div>
+<sc-if value="{{ hasKey }}" hint-placeholder-val="{{ false }}"><span style="display:flex;gap:6px;align-items:center;font-size:16px;color:#3F4D47;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5L20 7"></path></svg>Chave guardada no seu celular</span></sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-size:19px;line-height:24px;font-weight:700">Modelo no aparelho</h2>
+<span style="font-size:16px;line-height:23px;color:#66504F">Escreve os capítulos no seu celular, sem usar a internet.</span>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<sc-if value="{{ modelNone }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#ECE0DE;color:#66504F;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;border:2px solid #66504F;box-sizing:border-box"></span>Não baixado</span></sc-if>
+<sc-if value="{{ modelLoading }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;background:#007190"></span>Baixando · {{ modelPct }}</span></sc-if>
+<sc-if value="{{ modelDone }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#E3E9E6;color:#3F4D47;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;background:#6D7E77"></span>Baixado</span></sc-if>
+<span style="font-size:16px;color:#66504F">Tamanho: 1,9 GB</span>
+</div>
+<sc-if value="{{ modelLoading }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+<div style="height:12px;border-radius:999px;background:#E4D5D2;overflow:hidden"><div style="height:100%;border-radius:999px;background:#C56127;width:{{ modelPct }}"></div></div>
+<span style="font-size:16px;line-height:23px;color:#66504F">Pode continuar usando o app ou fechá-lo. O download continua.</span>
+</div>
+</sc-if>
+<sc-if value="{{ modelNone }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ download }}" style="margin-top:6px;height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Baixar modelo</button>
+</sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-size:19px;line-height:24px;font-weight:700">Seu jeito de contar</h2>
+<button onClick="{{ openVoiceFromConfig }}" style="display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:12px 16px;border:1px solid #E4D5D2;border-radius:14px;background:#FCF8F6;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#FFFFFF"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M20 4c-7 1-12 6-13 13l-2 3"></path><path d="M9 14c3 0 6-2 7-5"></path></svg><span style="flex:1;font-size:17px;line-height:24px">Veja e ajuste como o app escreve na sua voz.</span><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#66504F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:19px;line-height:24px;font-weight:700">O que sai do seu celular</h2>
+<div style="padding:18px;border-radius:18px;background:#FCF8F6;border:1px solid #E4D5D2;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:12px;align-items:flex-start"><span style="width:40px;height:40px;flex:none;border-radius:999px;background:#DCEEF3;color:#00586F;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg></span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;line-height:24px;font-weight:700">Sai: só o áudio</span><span style="font-size:16px;line-height:23px;color:#4F3D3C">E só durante a transcrição.</span></span></div>
+<div style="display:flex;gap:12px;align-items:flex-start"><span style="width:40px;height:40px;flex:none;border-radius:999px;background:#E3E9E6;color:#3F4D47;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg></span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;line-height:24px;font-weight:700">Fica no celular</span><span style="font-size:16px;line-height:23px;color:#4F3D3C">Seus textos, ideias e capítulos.</span></span></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;padding:8px 16px 0 8px">
+<button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto;padding:64px 24px 24px;display:flex;flex-direction:column;gap:20px">
+<span style="font-size:16px;line-height:22px;color:#66504F">{{ loadSource }}</span>
+<h1 style="margin:0;font-size:30px;line-height:38px;font-weight:700;text-wrap:pretty">{{ loadTitle }}</h1>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="height:14px;border-radius:999px;background:#E4D5D2;overflow:hidden"><div style="height:100%;border-radius:999px;background:#C56127;width:{{ progressPct }}"></div></div>
+<span style="font-size:17px;font-weight:700">{{ progressPct }}</span>
+</div>
+<div style="margin-top:12px;display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:14px;background:#EFE4E1;color:#4F3D3C;font-size:17px;line-height:25px"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex:none"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg><span>{{ loadNote }}</span></div>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;background:#F6EFEC">
+<button onClick="{{ goHome }}" style="height:56px;width:100%;border:2px solid #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Voltar para o livro</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isNetError }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;padding:8px 16px 0 8px">
+<button onClick="{{ goBack }}" style="height:48px;display:flex;align-items:center;gap:4px;padding:0 14px 0 8px;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M15 18l-6-6 6-6"></path></svg>Voltar</button>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto;padding:56px 24px 24px;display:flex;flex-direction:column;gap:18px">
+<span style="width:72px;height:72px;border-radius:999px;background:#F5DAD3;color:#9A2E22;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform:scale(1.4)"><path d="M7 18h10a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.2 9.6 4.3 4.3 0 0 0 7 18z"></path><path d="M3 3l18 18"></path></svg></span>
+<h1 style="margin:0;font-size:30px;line-height:36px;font-weight:700">Sem internet</h1>
+<p style="margin:0;font-size:19px;line-height:28px;text-wrap:pretty">Sem internet. O áudio ficou na fila e será enviado quando você voltar a ficar online.</p>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:18px;background:#FCF8F6;border:1px solid #E4D5D2">
+<span style="font-size:15px;color:#66504F">Áudio 2 · 0:36</span>
+<span style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:28px;font-weight:600">A mudança para a cidade</span>
+<span style="display:flex"><span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#ECE0DE;color:#66504F;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;border:2px solid #66504F;box-sizing:border-box"></span>Na fila</span></span>
+</div>
+</div>
+<div style="flex:none;padding:12px 24px 12px;border-top:1px solid #E4D5D2;background:#F6EFEC;display:flex;flex-direction:column;gap:10px">
+<button onClick="{{ goHome }}" style="height:60px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Voltar para o livro</button>
+<button onClick="{{ retry }}" style="height:56px;width:100%;border:2px solid #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Tentar agora</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position:absolute;left:16px;right:16px;bottom:16px;padding:14px 16px;border-radius:14px;background:#2E2322;color:#F6EFEC;font-size:17px;line-height:24px;box-shadow:0 6px 20px rgba(46,35,34,.25)">{{ toast }}</div>
+</sc-if>
+
+<sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end">
+<div onClick="{{ closeSheet }}" style="position:absolute;inset:0;background:rgba(46,35,34,.45)"></div>
+<div role="dialog" style="position:relative;max-height:92%;overflow-y:auto;box-sizing:border-box;background:#FCF8F6;border-radius:24px 24px 0 0;padding:12px 24px 20px;display:flex;flex-direction:column;gap:16px;box-shadow:0 -8px 24px rgba(46,35,34,.15)">
+<span style="align-self:center;width:44px;height:5px;border-radius:999px;background:#CDB8B6"></span>
+<sc-if value="{{ sheetFix }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:24px;line-height:30px;font-weight:700">Qual palavra você disse aqui?</h2>
+<p style="margin:0;font-family:'Literata',Georgia,serif;font-size:19px;line-height:30px;color:#4F3D3C">…ela sempre dizia que ainda não estava no ponto. <span style="display:inline-block;min-width:64px;border-bottom:2px dashed #C56127">&nbsp;</span> cortava o primeiro pedaço para mim.</p>
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>Áudio 1</span>
+<button onClick="{{ onPlay }}" style="height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;border:2px solid #8E716F;border-radius:999px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:currentColor"><path d="M8 5v14l11-7z"></path></svg>{{ playTrecho }}</button>
+</div>
+<input value="{{ fixDraft }}" onChange="{{ onFixDraft }}" placeholder="Escreva a palavra" aria-label="Palavra correta" style="height:56px;box-sizing:border-box;width:100%;padding:0 16px;border:2px solid #8E716F;border-radius:12px;background:#FFFCFB;color:#2E2322;font:400 20px/1 'Atkinson Hyperlegible',sans-serif">
+<div style="display:flex;flex-direction:column;gap:6px">
+<button onClick="{{ saveFix }}" disabled="{{ fixEmpty }}" style="height:60px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer;opacity:{{ fixOpacity }}" style-hover="background:#B2571F">Salvar correção</button>
+<button onClick="{{ closeSheet }}" style="height:48px;width:100%;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Cancelar</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ sheetOrigin }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:24px;line-height:30px;font-weight:700">De onde veio este trecho</h2>
+<span style="display:flex"><span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>{{ originSrc }}</span></span>
+<p style="margin:0;padding:14px 16px;border-radius:12px;background:#F6EFEC;font-family:'Literata',Georgia,serif;font-style:italic;font-size:19px;line-height:30px">{{ originText }}</p>
+<sc-if value="{{ originHasAudio }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ onPlay }}" style="align-self:flex-start;height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;border:2px solid #8E716F;border-radius:999px;background:transparent;color:#2E2322;font:700 17px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:currentColor"><path d="M8 5v14l11-7z"></path></svg>{{ playTrecho }}</button>
+</sc-if>
+<button onClick="{{ closeSheet }}" style="height:60px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F">Fechar</button>
+</div>
+</sc-if>
+<sc-if value="{{ sheetTitle }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;line-height:30px;font-weight:700">Nome do livro</h2>
+<input value="{{ titleDraft }}" onChange="{{ onTitleDraft }}" aria-label="Nome do livro" placeholder="Escreva o nome" style="height:60px;box-sizing:border-box;width:100%;padding:0 16px;border:2px solid #8E716F;border-radius:12px;background:#FFFCFB;color:#2E2322;font-family:'Literata',Georgia,serif;font-size:22px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<button onClick="{{ saveTitle }}" disabled="{{ titleEmpty }}" style="height:60px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer;opacity:{{ titleOpacity }}" style-hover="background:#B2571F" style-active="background:#A3501F">Salvar nome</button>
+<button onClick="{{ closeSheet }}" style="height:48px;width:100%;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Cancelar</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ sheetDelete }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<span style="width:56px;height:56px;border-radius:999px;background:#F5DAD3;color:#9A2E22;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"></path></svg></span>
+<h2 style="margin:0;font-size:24px;line-height:30px;font-weight:700;text-wrap:pretty">Excluir “{{ bookTitle }}”?</h2>
+<p style="margin:0;font-size:18px;line-height:26px;color:#4F3D3C">{{ deleteQuestion }}</p>
+<div role="radiogroup" style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ deleteOpts }}" as="x" hint-placeholder-count="2">
+<sc-if value="{{ x.selected }}"><button onClick="{{ x.onPick }}" role="radio" aria-checked="true" style="min-height:64px;display:flex;align-items:center;gap:14px;width:100%;padding:12px 16px;border:2px solid #C56127;border-radius:14px;background:#F6E1D3;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit"><span style="width:24px;height:24px;flex:none;box-sizing:border-box;border-radius:999px;border:2px solid #C56127;display:flex;align-items:center;justify-content:center"><span style="width:12px;height:12px;border-radius:999px;background:#C56127"></span></span><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:18px;line-height:23px;font-weight:700">{{ x.label }}</span><span style="font-size:16px;line-height:22px;color:#4F3D3C">{{ x.sub }}</span></span></button></sc-if>
+<sc-if value="{{ x.notSelected }}"><button onClick="{{ x.onPick }}" role="radio" aria-checked="false" style="min-height:64px;display:flex;align-items:center;gap:14px;width:100%;padding:12px 16px;border:2px solid #E4D5D2;border-radius:14px;background:#FFFCFB;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#F6EFEC"><span style="width:24px;height:24px;flex:none;box-sizing:border-box;border-radius:999px;border:2px solid #8E716F;display:flex;align-items:center;justify-content:center"></span><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:18px;line-height:23px;font-weight:700">{{ x.label }}</span><span style="font-size:16px;line-height:22px;color:#4F3D3C">{{ x.sub }}</span></span></button></sc-if>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+<button onClick="{{ confirmDelete }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#9A2E22;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#86271D" style-active="background:#73211A"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"></path></svg>{{ deleteLabel }}</button>
+<button onClick="{{ closeSheet }}" style="height:56px;width:100%;border:2px solid #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Cancelar</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ sheetWhere }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;line-height:30px;font-weight:700">Onde guardar esta história?</h2>
+<sc-if value="{{ hasBook }}" hint-placeholder-val="{{ true }}"><button onClick="{{ whereBook }}" style="min-height:72px;display:flex;align-items:center;gap:14px;width:100%;padding:12px 16px;border:2px solid #E4D5D2;border-radius:14px;background:#FFFCFB;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#F6EFEC"><span style="width:36px;height:48px;flex:none;border-radius:2px 6px 6px 2px;background:#007190;box-shadow:inset 3px 0 0 rgba(0,0,0,.14)"></span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'Literata',Georgia,serif;font-size:20px;line-height:26px;font-weight:600">{{ bookTitle }}</span><span style="font-size:16px;color:#66504F">Você escolhe o capítulo depois</span></span></button></sc-if>
+<button onClick="{{ whereDraft }}" style="min-height:72px;display:flex;align-items:center;gap:14px;width:100%;padding:12px 16px;border:2px solid #E4D5D2;border-radius:14px;background:#FFFCFB;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#F6EFEC"><span style="width:36px;height:48px;flex:none;box-sizing:border-box;border-radius:4px;border:2px dashed #8E716F"></span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:19px;line-height:25px;font-weight:700">Rascunho sem livro</span><span style="font-size:16px;color:#66504F">Fica guardado até você decidir</span></span></button>
+<button onClick="{{ closeSheet }}" style="height:48px;width:100%;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Cancelar</button>
+</div>
+</sc-if>
+<sc-if value="{{ sheetToBook }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;line-height:30px;font-weight:700">Guardar em um livro</h2>
+<span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;color:#66504F">{{ toBookLabel }}</span><span style="font-family:'Literata',Georgia,serif;font-size:20px;line-height:26px;font-weight:600">{{ toBookName }}</span></span>
+<div role="radio" aria-checked="true" style="min-height:72px;display:flex;align-items:center;gap:14px;padding:12px 16px;border:2px solid #C56127;border-radius:14px;background:#F6E1D3"><span style="width:36px;height:48px;flex:none;border-radius:2px 6px 6px 2px;background:#007190;box-shadow:inset 3px 0 0 rgba(0,0,0,.14)"></span><span style="flex:1;font-family:'Literata',Georgia,serif;font-size:20px;line-height:26px;font-weight:600">{{ bookTitle }}</span><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#8A3F14;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5L20 7"></path></svg></div>
+<button onClick="{{ confirmToBook }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Guardar e escolher o capítulo</button>
+<button onClick="{{ closeSheet }}" style="height:48px;width:100%;border:0;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Cancelar</button>
+</div>
+</sc-if>
+<sc-if value="{{ sheetAssign }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;line-height:30px;font-weight:700">Capítulo e ordem</h2>
+<span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;color:#66504F">{{ assignLabel }}</span><span style="font-family:'Literata',Georgia,serif;font-size:20px;line-height:26px;font-weight:600">{{ assignName }}</span></span>
+<span style="font-size:17px;font-weight:700;margin-top:4px">Em qual capítulo?</span>
+<div role="radiogroup" style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ chapterOpts }}" as="o" hint-placeholder-count="3">
+<sc-if value="{{ o.selected }}"><button onClick="{{ o.onPick }}" role="radio" aria-checked="true" style="min-height:60px;display:flex;align-items:center;gap:14px;width:100%;padding:10px 16px;border:2px solid #C56127;border-radius:14px;background:#F6E1D3;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit"><span style="width:24px;height:24px;flex:none;box-sizing:border-box;border-radius:999px;border:2px solid #C56127;display:flex;align-items:center;justify-content:center"><span style="width:12px;height:12px;border-radius:999px;background:#C56127"></span></span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;line-height:23px;font-weight:700">{{ o.label }}</span><span style="font-family:'Literata',Georgia,serif;font-size:17px;line-height:23px;color:#4F3D3C">{{ o.sub }}</span></span></button></sc-if>
+<sc-if value="{{ o.notSelected }}"><button onClick="{{ o.onPick }}" role="radio" aria-checked="false" style="min-height:60px;display:flex;align-items:center;gap:14px;width:100%;padding:10px 16px;border:2px solid #E4D5D2;border-radius:14px;background:#FFFCFB;color:#2E2322;text-align:left;cursor:pointer;font-family:inherit" style-hover="background:#F6EFEC"><span style="width:24px;height:24px;flex:none;box-sizing:border-box;border-radius:999px;border:2px solid #8E716F;display:flex;align-items:center;justify-content:center"></span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;line-height:23px;font-weight:700">{{ o.label }}</span><span style="font-family:'Literata',Georgia,serif;font-size:17px;line-height:23px;color:#4F3D3C">{{ o.sub }}</span></span></button></sc-if>
+</sc-for>
+</div>
+<sc-if value="{{ assignHasCh }}">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-size:17px;font-weight:700;margin-top:6px">Ordem dentro do capítulo</span>
+<sc-for list="{{ orderItems }}" as="a" hint-placeholder-count="2">
+<div style="display:flex;align-items:center;gap:10px;min-height:60px;padding:6px 8px 6px 12px;border-radius:14px;background:{{ a.bg }}">
+<span style="width:32px;height:32px;flex:none;border-radius:999px;background:#2E2322;color:#F6EFEC;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ a.pos }}</span>
+<span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-family:'Literata',Georgia,serif;font-size:18px;line-height:24px;font-weight:600">{{ a.name }}</span><span style="font-size:15px;color:#66504F">{{ a.sub }}</span></span>
+<sc-if value="{{ a.isMe }}"><button onClick="{{ a.onUp }}" aria-label="Subir na ordem" style="width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;border:2px solid #8E716F;border-radius:12px;background:#FCF8F6;color:#2E2322;cursor:pointer;opacity:{{ a.upOpacity }}" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button><button onClick="{{ a.onDown }}" aria-label="Descer na ordem" style="width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;border:2px solid #8E716F;border-radius:12px;background:#FCF8F6;color:#2E2322;cursor:pointer;opacity:{{ a.downOpacity }}" style-hover="background:#EDE1DE"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></button></sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<button onClick="{{ closeSheet }}" style="height:60px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Pronto</button>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<div style="height:24px;flex:none;display:flex;align-items:center;justify-content:center"><span style="width:108px;height:4px;border-radius:2px;background:#2E2322;opacity:.45"></span></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;start&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;library&quot;,&quot;book&quot;,&quot;trans&quot;,&quot;loadingVoice&quot;,&quot;voice&quot;,&quot;ideas&quot;,&quot;chapter&quot;,&quot;preview&quot;,&quot;config&quot;,&quot;loadingTrans&quot;,&quot;loadingChapter&quot;,&quot;netError&quot;],&quot;default&quot;:&quot;library&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;demo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;assign&quot;,&quot;ordered&quot;,&quot;title&quot;,&quot;delete&quot;,&quot;voiceMixed&quot;,&quot;few&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;page&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;number&quot;},&quot;hold&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;number&quot;},&quot;nonce&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;number&quot;}}">
+const AUD = {
+  1: { id: 1, label: 'Áudio 1', name: 'O bolo de laranja', dur: '0:42', st: 'Pronto' },
+  2: { id: 2, label: 'Áudio 2', name: 'A mudança para a cidade', dur: '0:36', st: 'Transcrevendo' },
+  3: { id: 3, label: 'Áudio 3', name: 'Uma história curta', dur: '0:28', st: 'Na fila' }
+};
+const CHAPTERS = [{ n: 1, title: 'O bolo de laranja' }, { n: 2, title: 'A mudança para a cidade' }];
+const IDEAS = [
+  { type: 'História', text: 'Toda sexta, a casa cheirava a bolo de laranja.', src: 'Áudio 1 · 00:03', orig: 'Toda sexta-feira a casa cheirava a laranja. Era dia de bolo.' },
+  { type: 'Fato', text: 'A avó dizia que o bolo ainda não estava no ponto.', src: 'Áudio 1 · 00:14', orig: 'Eu ficava na porta da cozinha esperando a minha avó tirar a forma do forno, e ela sempre dizia que ainda não estava no ponto.' },
+  { type: 'Opinião', text: 'Aprendi mais cozinhando junto do que em qualquer livro.', src: 'Áudio 3 · 00:09', orig: 'Aprendi mais cozinhando junto do que em qualquer livro.' }
+];
+const PASSAGES = [
+  { text: 'Toda sexta-feira a casa cheirava a laranja. Era dia de bolo.', src: 'Áudio 1 · 00:03', orig: '“Toda sexta-feira a casa cheirava a laranja. Era dia de bolo.”' },
+  { text: 'Eu ficava na porta da cozinha esperando minha avó tirar a forma do forno. Ela sempre dizia que ainda não estava no ponto.', src: 'Áudio 1 · 00:14', orig: '“Eu ficava na porta da cozinha esperando a minha avó tirar a forma do forno, e ela sempre dizia que ainda não estava no ponto.”' }
+];
+const TRAITS = [
+  { name: 'Ritmo', trait: 'Frases curtas, e uma mais longa no meio para respirar.', quote: 'Toda sexta-feira a casa cheirava a laranja. Era dia de bolo.', src: 'Áudio 1 · 00:03' },
+  { name: 'Abertura', trait: 'Começa com uma cena concreta antes de explicar.', quote: 'Eu ficava na porta da cozinha esperando minha avó tirar a forma do forno.', src: 'Áudio 1 · 00:14' },
+  { name: 'Jeito de dizer', trait: 'Fala de aprendizado de forma simples, sem sermão.', quote: 'Aprendi mais cozinhando junto do que em qualquer livro.', src: 'Áudio 3 · 00:09' }
+];
+const BACK = { book: 'library', trans: 'book', ideas: 'voice', voice: 'trans', loadingVoice: 'trans', chapter: 'ideas', preview: 'book', config: 'library', loadingTrans: 'book', loadingChapter: 'ideas', netError: 'book' };
+
+class Component extends DCLogic {
+  state = { screen: null, corrected: null, sheet: null, fixDraft: '', expanded: null, gapDraft: '', gapAnswer: null, editing: false, drafts: null, edits: null, approved: false, showKey: false, keyVal: '', model: 'none', modelP: 0, progress: 0, toast: null, playing: false, origin: null,
+    inBook: { 1: true, 2: true, 3: false }, chOf: { 1: 1, 2: 2, 3: null }, order: { 1: [1], 2: [2] }, bookView: 'timeline', assignId: null, page: 0, bookTitle: 'Meu livro', titleDraft: '', bookDeleted: false, gone: {}, delMode: 'book', traits: {}, voiceFrom: null, fewData: false };
+
+  componentDidMount() {
+    this.iv = setInterval(this.tick, 100);
+    const d = this.props.demo, up = {};
+    if (d === 'assign') Object.assign(up, { inBook: { 1: true, 2: true, 3: true }, sheet: 'assign', assignId: 3 });
+    if (d === 'ordered') Object.assign(up, { inBook: { 1: true, 2: true, 3: true }, chOf: { 1: 1, 2: 2, 3: 1 }, order: { 1: [1, 3], 2: [2] }, bookView: 'capitulos' });
+    if (d === 'voiceMixed') up.traits = { 0: 'yes', 2: 'no' };
+    if (d === 'few') up.fewData = true;
+    if (d === 'delete') Object.assign(up, { sheet: 'delete', delMode: 'book' });
+    if (d === 'title') Object.assign(up, { sheet: 'title', titleDraft: 'Meu livro' });
+    if (this.props.page != null) up.page = this.props.page;
+    if (Object.keys(up).length) this.setState(up);
+  }
+  componentWillUnmount() { clearInterval(this.iv); clearTimeout(this.tt); clearTimeout(this.pt); }
+  componentDidUpdate(prev) {
+    if (prev.nonce !== this.props.nonce && this.props.start) {
+      if (this.state.bookDeleted) this.setState({ bookDeleted: false, gone: {}, inBook: { 1: true, 2: true, 3: false }, chOf: { 1: 1, 2: 2, 3: null }, order: { 1: [1], 2: [2] } });
+      this.go(this.props.start);
+    }
+  }
+
+  cur() { return this.state.screen || this.props.start || 'library'; }
+  go = (screen) => { this.setState({ screen, sheet: null, expanded: null, progress: 0, toast: null, playing: false }); };
+  showToast = (msg) => { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: null }), 2800); };
+  play = () => { clearTimeout(this.pt); this.setState({ playing: true }); this.pt = setTimeout(() => this.setState({ playing: false }), 2200); };
+
+  tick = () => {
+    const s = this.state, scr = this.cur(), hold = this.props.hold, up = {};
+    if (scr === 'loadingChapter' || scr === 'loadingVoice') {
+      if (hold != null) { if (s.progress !== hold) up.progress = hold; }
+      else { const p = Math.min(100, s.progress + 2.5); up.progress = p; if (p >= 100) { this.go(scr === 'loadingVoice' ? 'voice' : 'chapter'); return; } }
+    } else if (scr === 'loadingTrans') {
+      const target = hold != null ? hold : 64;
+      if (s.progress !== target) up.progress = hold != null ? hold : Math.min(target, s.progress + 0.8);
+    }
+    if (s.model === 'downloading') { const m = Math.min(100, s.modelP + 1.2); up.modelP = m; if (m >= 100) up.model = 'done'; }
+    if (Object.keys(up).length) this.setState(up);
+  };
+
+  openAudio = (id) => {
+    if (id === 1) this.go('trans');
+    else if (id === 2) this.go('loadingTrans');
+    else this.showToast('O Áudio 3 está na fila. Ele será transcrito depois do Áudio 2.');
+  };
+  assign = (id, ch) => this.setState(st => {
+    const order = { ...st.order }, old = st.chOf[id];
+    if (old) order[old] = (order[old] || []).filter(x => x !== id);
+    if (ch) order[ch] = [...(order[ch] || []).filter(x => x !== id), id];
+    return { chOf: { ...st.chOf, [id]: ch }, order };
+  });
+  move = (id, dir) => this.setState(st => {
+    const ch = st.chOf[id]; if (!ch) return null;
+    const arr = [...st.order[ch]], i = arr.indexOf(id), j = i + dir;
+    if (j < 0 || j >= arr.length) return null;
+    arr[i] = arr[j]; arr[j] = id;
+    return { order: { ...st.order, [ch]: arr } };
+  });
+
+  renderVals() {
+    const s = this.state, scr = this.cur();
+    const inBookIds = [1, 2, 3].filter(id => s.inBook[id]);
+    const flags = (a) => ({ isPronto: a.st === 'Pronto', isTrans: a.st === 'Transcrevendo', isFila: a.st === 'Na fila' });
+    const bookMeta = CHAPTERS.length + ' capítulos · ' + inBookIds.length + ' áudios';
+
+    const drafts = [1, 2, 3].filter(id => !s.inBook[id] && !s.gone[id]).map(id => ({ ...AUD[id], onToBook: () => s.bookDeleted ? this.showToast('Crie um livro primeiro para guardar este áudio.') : this.setState({ sheet: 'toBook', assignId: id }) }));
+
+    const posLabel = (id) => {
+      const ch = s.chOf[id]; if (!ch) return '';
+      const arr = s.order[ch] || [];
+      return 'Capítulo ' + ch + ' · ' + (arr.indexOf(id) + 1) + 'º de ' + arr.length;
+    };
+    const openAssign = (id) => () => this.setState({ sheet: 'assign', assignId: id });
+    const timeline = inBookIds.map(id => ({ ...AUD[id], ...flags(AUD[id]), hasChapter: !!s.chOf[id], noChapter: !s.chOf[id], chapterLabel: posLabel(id), onOpen: () => this.openAudio(id), onAssign: openAssign(id) }));
+
+    const chapters = CHAPTERS.map(c => {
+      const arr = s.order[c.n] || [];
+      return { kicker: 'Capítulo ' + c.n, title: c.title, empty: arr.length === 0,
+        items: arr.map((id, i) => ({ ...AUD[id], pos: i + 1, canMove: true, cantMove: false,
+          upOpacity: i === 0 ? 0.35 : 1, downOpacity: i === arr.length - 1 ? 0.35 : 1,
+          onUp: () => this.move(id, -1), onDown: () => this.move(id, 1), onOpen: () => this.openAudio(id), onAssign: openAssign(id) })) };
+    });
+    const loose = inBookIds.filter(id => !s.chOf[id]);
+    if (loose.length) chapters.push({ kicker: 'Sem capítulo', title: 'Ainda sem lugar', empty: false,
+      items: loose.map(id => ({ ...AUD[id], pos: '–', canMove: false, cantMove: true, onOpen: () => this.openAudio(id), onAssign: openAssign(id) })) });
+
+    const aid = s.assignId, aCh = aid ? s.chOf[aid] : null;
+    const chapterOpts = CHAPTERS.map(c => ({ label: 'Capítulo ' + c.n, sub: c.title, selected: aCh === c.n, notSelected: aCh !== c.n, onPick: () => this.assign(aid, c.n) }));
+    chapterOpts.push({ label: 'Sem capítulo', sub: 'Decido depois', selected: !aCh, notSelected: !!aCh, onPick: () => this.assign(aid, null) });
+    const aArr = aCh ? (s.order[aCh] || []) : [];
+    const orderItems = aArr.map((id, i) => ({ pos: i + 1, name: AUD[id].name, sub: id === aid ? AUD[id].label + ' · este áudio' : AUD[id].label, isMe: id === aid,
+      bg: id === aid ? '#F6E1D3' : '#F6EFEC', upOpacity: i === 0 ? 0.35 : 1, downOpacity: i === aArr.length - 1 ? 0.35 : 1,
+      onUp: () => this.move(id, -1), onDown: () => this.move(id, 1) }));
+
+    const ideas = IDEAS.map((it, i) => ({ ...it, expanded: s.expanded === i, hint: s.expanded === i ? 'Fechar' : 'Ver trecho', onToggle: () => this.setState({ expanded: s.expanded === i ? null : i }) }));
+    const passText = (i, fallback) => (s.edits && s.edits[i] != null) ? s.edits[i] : fallback;
+    const base = PASSAGES.map(p => ({ ...p }));
+    if (s.gapAnswer) base.push({ text: s.gapAnswer + ' cortava o primeiro pedaço para mim.', src: 'Sua resposta', orig: 'Você escreveu “' + s.gapAnswer + '” ao responder à pergunta do capítulo.', own: true });
+    const passages = base.map((p, i) => ({
+      ...p, text: passText(i, p.text), draft: s.drafts ? (s.drafts[i] ?? '') : '', editing: s.editing, reading: !s.editing,
+      onDraft: (e) => { const v = e.target.value; this.setState(st => { const d = [...(st.drafts || [])]; d[i] = v; return { drafts: d }; }); },
+      onOrigin: () => this.setState({ sheet: 'origin', origin: { src: p.src, text: p.orig, audio: !p.own } })
+    }));
+
+    const textB = (p) => ({ isText: true, text: p.text, src: p.src, onOrigin: () => this.setState({ sheet: 'origin', origin: { src: p.src, text: p.orig, audio: !p.own } }) });
+    const chapterBlocks = (n) => {
+      const blocks = [];
+      (s.order[n] || []).forEach(id => {
+        if (id === 1) { passages.forEach(p => blocks.push(textB(p))); if (!s.gapAnswer) blocks.push({ isGap: true }); }
+        if (id === 2) blocks.push({ isPending: true, text: 'O Áudio 2 · A mudança para a cidade ainda está sendo transcrito. O texto aparece aqui quando ficar pronto.' });
+        if (id === 3) blocks.push(textB({ text: 'Aprendi mais cozinhando junto do que em qualquer livro.', src: 'Áudio 3 · 00:09', orig: '“Aprendi mais cozinhando junto do que em qualquer livro.”' }));
+      });
+      let first = true;
+      blocks.forEach(b => { if (b.isText) { if (first) { b.isDrop = true; b.first = b.text.charAt(0); b.rest = b.text.slice(1); first = false; } else b.isPlain = true; } });
+      if (!blocks.length) blocks.push({ isEmptyCh: true });
+      return blocks;
+    };
+    const chStatus = (n) => {
+      const arr = s.order[n] || [];
+      if (!arr.length) return 'Sem áudios';
+      if (arr.includes(1)) return s.approved ? 'Aprovado' : 'Rascunho';
+      return 'Esperando a transcrição';
+    };
+    const pages = [
+      { isCover: true },
+      { isToc: true, rows: CHAPTERS.map((c, i) => ({ num: c.n, title: c.title, pg: String(i + 3), status: chStatus(c.n), onGo: () => this.setState({ page: i + 2 }) })) },
+      ...CHAPTERS.map(c => ({ isChapter: true, num: c.n, title: c.title, blocks: chapterBlocks(c.n) }))
+    ];
+    const page = Math.min(s.page, pages.length - 1);
+    const pageItems = [{ ...pages[page], label: 'Página ' + (page + 1) + ' de ' + pages.length, no: String(page + 1) }];
+
+    const loadTrans = scr === 'loadingTrans';
+    const pct = Math.round(s.progress) + '%';
+    const toBook = aid ? AUD[aid] : null;
+
+    const nIn = inBookIds.length;
+    const delOpts = [
+      { key: 'book', label: 'Excluir só o livro', sub: 'Os áudios voltam para Rascunhos sem livro.' },
+      { key: 'all', label: 'Excluir o livro e os áudios', sub: 'Os áudios e os textos saem do seu celular. Não dá para desfazer.' }
+    ].map(o => ({ ...o, selected: s.delMode === o.key, notSelected: s.delMode !== o.key, onPick: () => this.setState({ delMode: o.key }) }));
+    return {
+      bookTitle: s.bookTitle, hasBook: !s.bookDeleted, noBook: s.bookDeleted,
+      openTitle: () => this.setState({ sheet: 'title', titleDraft: s.bookTitle }),
+      titleDraft: s.titleDraft, onTitleDraft: (e) => this.setState({ titleDraft: e.target.value }),
+      titleEmpty: !s.titleDraft.trim(), titleOpacity: s.titleDraft.trim() ? 1 : 0.45,
+      saveTitle: () => { const t = s.titleDraft.trim(); if (t) { this.setState({ bookTitle: t, sheet: null }); this.showToast('Nome do livro salvo.'); } },
+      sheetTitle: s.sheet === 'title', sheetDelete: s.sheet === 'delete',
+      openDelete: () => this.setState({ sheet: 'delete', delMode: 'book' }),
+      deleteQuestion: 'O que fazer com ' + (nIn === 1 ? 'o áudio' : 'os ' + nIn + ' áudios') + ' deste livro?',
+      deleteOpts: delOpts, deleteLabel: s.delMode === 'all' ? 'Excluir livro e áudios' : 'Excluir só o livro',
+      confirmDelete: () => {
+        const all = s.delMode === 'all', inB = { ...s.inBook }, chOf = { ...s.chOf }, gone = { ...s.gone };
+        inBookIds.forEach(id => { inB[id] = false; chOf[id] = null; if (all) gone[id] = true; });
+        this.go('library');
+        this.setState({ bookDeleted: true, inBook: inB, chOf, gone, order: { 1: [], 2: [] } });
+        this.showToast(all ? 'Livro e áudios excluídos.' : 'Livro excluído. Os áudios estão em Rascunhos sem livro.');
+      },
+      isVoice: scr === 'voice', fewData: s.fewData,
+      voiceStep: s.voiceFrom === 'config' ? 'Ajustes' : 'Passo 2 de 4',
+      voiceSub: s.fewData ? 'Baseado em 1 áudio. Quanto mais você gravar, mais o app aprende.' : 'Baseado em 3 áudios. Quanto mais você gravar, mais o app aprende.',
+      traits: TRAITS.filter((t, i) => !s.fewData || i < 2).map((t, i) => {
+        const v = s.traits[i];
+        const setT = (val) => this.setState(st => ({ traits: { ...st.traits, [i]: val } }));
+        return { ...t, isNeutral: !v, isYes: v === 'yes', isNo: v === 'no', border: v === 'yes' ? '#C56127' : '#E4D5D2', dim: v === 'no' ? 0.45 : 1,
+          onYes: () => setT(v === 'yes' ? null : 'yes'), onNo: () => setT('no'), onUndo: () => setT(null),
+          onOrigin: () => this.setState({ sheet: 'origin', origin: { src: t.src, text: '“' + t.quote + '”', audio: true } }) };
+      }),
+      useVoice: () => {
+        const from = s.voiceFrom;
+        if (from === 'chapter') this.go('chapter');
+        else if (from === 'config') { this.go('config'); this.showToast('Seu jeito de contar foi salvo.'); }
+        else this.go('ideas');
+      },
+      openVoiceFromChapter: () => { this.go('voice'); this.setState({ voiceFrom: 'chapter' }); },
+      openVoiceFromConfig: () => { this.go('voice'); this.setState({ voiceFrom: 'config' }); },
+      isLibrary: scr === 'library', isBook: scr === 'book', isPreview: scr === 'preview',
+      isTrans: scr === 'trans', isIdeas: scr === 'ideas', isChapter: scr === 'chapter', isConfig: scr === 'config',
+      isLoading: scr === 'loadingTrans' || scr === 'loadingChapter' || scr === 'loadingVoice', isNetError: scr === 'netError',
+      bookMeta, drafts, noDrafts: drafts.length === 0, timeline, chapters, chapterOpts, orderItems, assignHasCh: !!aCh,
+      assignName: aid ? AUD[aid].name : '', assignLabel: aid ? AUD[aid].label + ' · ' + AUD[aid].dur : '',
+      toBookName: toBook ? toBook.name : '', toBookLabel: toBook ? toBook.label + ' · ' + toBook.dur : '',
+      isTimelineView: s.bookView === 'timeline', isChaptersView: s.bookView !== 'timeline',
+      showTimeline: () => this.setState({ bookView: 'timeline' }), showChapters: () => this.setState({ bookView: 'capitulos' }),
+      openBook: () => this.go('book'), openPreview: () => { this.go('preview'); this.setState({ page: 0 }); }, goChapter: () => this.go('chapter'),
+      openWhere: () => this.setState({ sheet: 'where' }),
+      whereBook: () => { this.setState({ sheet: null }); this.showToast('A gravação não faz parte deste protótipo. A história iria para ' + s.bookTitle + '.'); },
+      whereDraft: () => { this.setState({ sheet: null }); this.showToast('A gravação não faz parte deste protótipo. A história iria para os rascunhos.'); },
+      confirmToBook: () => this.setState(st => ({ inBook: { ...st.inBook, [aid]: true }, screen: 'book', bookView: 'timeline', sheet: 'assign' })),
+      onNewBook: () => this.showToast('Criar um livro novo não faz parte deste protótipo.'),
+      onNewChapter: () => this.showToast('Criar um capítulo novo não faz parte deste protótipo.'),
+      onRecordBook: () => this.showToast('A gravação não faz parte deste protótipo.'),
+      pageItems, prevOpacity: page === 0 ? 0.4 : 1, nextOpacity: page === pages.length - 1 ? 0.4 : 1,
+      prevPage: () => this.setState({ page: Math.max(0, page - 1) }), nextPage: () => this.setState({ page: Math.min(pages.length - 1, page + 1) }),
+      ideas, passages,
+      goBack: () => this.go(scr === 'voice' && s.voiceFrom ? s.voiceFrom : (BACK[scr] || 'library')), goHome: () => this.go('book'), goConfig: () => this.go('config'),
+      goIdeas: () => { this.go('loadingVoice'); this.setState({ voiceFrom: null }); }, goWrite: () => this.go('loadingChapter'),
+      onPlay: this.play,
+      playLabel: s.playing ? 'Tocando…' : 'Ouvir o áudio',
+      playTrecho: s.playing ? 'Tocando…' : 'Ouvir este trecho',
+      notCorrected: !s.corrected, isCorrected: !!s.corrected, correctedWord: s.corrected || '',
+      openFix: () => this.setState({ sheet: 'fix', fixDraft: s.corrected || '' }),
+      fixDraft: s.fixDraft, onFixDraft: (e) => this.setState({ fixDraft: e.target.value }),
+      fixEmpty: !s.fixDraft.trim(), fixOpacity: s.fixDraft.trim() ? 1 : 0.45,
+      saveFix: () => { const w = s.fixDraft.trim(); if (!w) return; this.setState({ corrected: w, sheet: null, gapDraft: s.gapDraft || w }); },
+      sheetOpen: !!s.sheet, sheetFix: s.sheet === 'fix', sheetOrigin: s.sheet === 'origin',
+      sheetWhere: s.sheet === 'where', sheetToBook: s.sheet === 'toBook', sheetAssign: s.sheet === 'assign',
+      closeSheet: () => this.setState({ sheet: null }),
+      originSrc: s.origin ? s.origin.src : '', originText: s.origin ? s.origin.text : '', originHasAudio: s.origin ? s.origin.audio : true,
+      gapOpen: !s.gapAnswer, gapDraft: s.gapDraft, gapEmpty: !s.gapDraft.trim(),
+      onGapDraft: (e) => this.setState({ gapDraft: e.target.value }),
+      saveGap: () => { const v = s.gapDraft.trim(); if (v) this.setState({ gapAnswer: v.charAt(0).toUpperCase() + v.slice(1) }); },
+      editing: s.editing, approved: s.approved, notApproved: !s.approved,
+      chapterActions: !s.editing && !s.approved, chapterHint: !s.editing && !s.approved,
+      startEdit: () => this.setState({ editing: true, drafts: passages.map(p => p.text) }),
+      cancelEdit: () => this.setState({ editing: false, drafts: null }),
+      saveEdit: () => this.setState({ editing: false, edits: s.drafts, drafts: null }),
+      approve: () => this.setState({ approved: true }),
+      keyType: s.showKey ? 'text' : 'password', keyBtn: s.showKey ? 'Ocultar' : 'Mostrar', keyVal: s.keyVal, hasKey: !!s.keyVal.trim(),
+      onKey: (e) => this.setState({ keyVal: e.target.value }), toggleKey: () => this.setState({ showKey: !s.showKey }),
+      modelNone: s.model === 'none', modelLoading: s.model === 'downloading', modelDone: s.model === 'done',
+      modelPct: Math.round(s.modelP) + '%', download: () => this.setState({ model: 'downloading', modelP: 0 }),
+      progressPct: pct,
+      loadSource: loadTrans ? 'Áudio 2 · A mudança para a cidade · 0:36' : (scr === 'loadingVoice' ? (s.fewData ? 'Baseado em 1 áudio' : 'Baseado em 3 áudios') : 'O bolo de laranja · 3 ideias'),
+      loadTitle: loadTrans ? 'Transcrevendo seu áudio' : scr === 'loadingVoice' ? 'Lendo como você fala…' : 'Escrevendo o capítulo no seu celular',
+      loadNote: scr === 'loadingVoice' ? 'Pode fechar o app. Continuamos lendo seus áudios e avisamos quando terminar.' : loadTrans ? 'Pode fechar o app. A transcrição continua e o áudio aparece pronto no seu livro.' : 'Pode fechar o app. O capítulo continua sendo escrito, e nada sai do seu celular nesta etapa.',
+      retry: () => this.showToast('Ainda sem internet. O áudio continua na fila.'),
+      toast: s.toast, hasToast: !!s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>body{margin:0;background:#EADCDA;font-family:'Atkinson Hyperlegible',system-ui,sans-serif;color:#2E2322}a{color:#8A3F14}a:hover{color:#C56127}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:700 15px/1.2 'Atkinson Hyperlegible',system-ui,sans-serif;color:#1a1a1a}.dv-opts{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 13px/1.3 'Atkinson Hyperlegible',system-ui,sans-serif;color:rgba(0,0,0,.6)}.dv-opt:target .dv-oid{background:#C56127;color:#fff}.dv-next{margin:28px 0 0;font:13px/1.5 'Atkinson Hyperlegible',system-ui,sans-serif;color:rgba(0,0,0,.55)}</style>
+</helmet>
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Seu jeito de contar · perfil de voz</span></div>
+<div style="max-width:760px;margin:0 0 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 32px;font-size:14px;line-height:21px;color:#4F3D3C">
+<p style="margin:0"><strong style="color:#2E2322">Fluxo.</strong> Transcrição › Seu jeito de contar › Ideias › Capítulo, em 4 passos. No protótipo <a class="dv-oid" href="#2a">2a</a>, “Está certo, continuar” passa por “Lendo como você fala…”.</p>
+<p style="margin:0"><strong style="color:#2E2322">Cartão de traço.</strong> O trecho real dela, em serifa, é o maior elemento do cartão. O selo de origem toca o áudio. Não há números nem gráficos.</p>
+<p style="margin:0"><strong style="color:#2E2322">Ajustes.</strong> Também abre por uma linha em Configuração e pelo selo “Escrito no seu jeito de contar” no Capítulo. “Voltar” retorna de onde veio.</p>
+</div>
+<div class="dv-opts">
+<div class="dv-opt" id="3a">
+<div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>Um traço aprovado, um recusado, um em aberto</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="voice" demo="voiceMixed" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="3b">
+<div class="dv-olabel"><a class="dv-oid" href="#3b">3b</a>Carregando: lendo como você fala</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="loadingVoice" hold="{{ holdVoice }}" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="3c">
+<div class="dv-olabel"><a class="dv-oid" href="#3c">3c</a>Poucos dados: um áudio só</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="voice" demo="few" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="3d">
+<div class="dv-olabel"><a class="dv-oid" href="#3d">3d</a>Capítulo com o selo “Escrito no seu jeito de contar”</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="chapter" hint-size="390px,844px"></dc-import></div></div>
+</div>
+</div>
+<p class="dv-next">Próximos passos: “mostre o que muda no capítulo quando um traço é recusado” · “deixe a tela opcional depois do primeiro livro” · “adicione um quarto traço”</p>
+</section>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Livros, capítulos e prévia · nova paleta</span></div>
+<div style="max-width:760px;margin:0 0 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 32px;font-size:14px;line-height:21px;color:#4F3D3C">
+<p style="margin:0"><strong style="color:#2E2322">Início.</strong> “Meus livros”: abrir um livro ou ver os rascunhos sem livro. “Gravar uma história” pergunta onde guardar.</p>
+<p style="margin:0"><strong style="color:#2E2322">Livro.</strong> Linha do tempo dos áudios e visão por capítulos. A ordem muda com setas de 48 px, sem arrastar.</p>
+<p style="margin:0"><strong style="color:#2E2322">Cores.</strong> Ações em Vinaceous Tawny. Origem e progresso em Antwerp Blue. Pronto em Andover Green. Papel tirado do Light Brown Drab.</p>
+</div>
+
+<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Protótipo navegável</div>
+<div class="dv-opts" style="margin-bottom:56px">
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Tente: Áudio 3 › Guardar em um livro › escolher capítulo › Prévia.</div>
+<div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="{{ jump2 }}" nonce="{{ nonce2 }}" hint-size="390px,844px"></dc-import></div></div>
+<div style="display:flex;flex-direction:column;gap:8px;width:200px;padding-top:8px">
+<span style="font-size:13px;color:#66504F;margin-bottom:4px">Ir direto para</span>
+<sc-for list="{{ jumps2 }}" as="j" hint-placeholder-count="7">
+<button onClick="{{ j.onClick }}" style="height:44px;display:flex;align-items:center;gap:10px;padding:0 14px;border:1px solid #CDB8B6;border-radius:12px;background:#F6EFEC;color:#2E2322;font:700 15px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer;text-align:left" style-hover="background:#FCF8F6;border-color:#C56127"><span style="width:22px;height:22px;border-radius:999px;background:#2E2322;color:#F6EFEC;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">{{ j.n }}</span>{{ j.label }}</button>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+
+<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Telas novas</div>
+<div class="dv-opts" style="margin-bottom:56px">
+<div class="dv-opt" id="2b">
+<div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Livro: por capítulos, com ordem</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="book" demo="ordered" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="2c">
+<div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Capítulo e ordem de um áudio</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="book" demo="assign" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="2d">
+<div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>Prévia do livro: capítulo 1</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="preview" demo="ordered" page="{{ pageTwo }}" hint-size="390px,844px"></dc-import></div></div>
+</div>
+</div>
+
+<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Editar e excluir o livro</div>
+<div class="dv-opts" style="margin-bottom:56px">
+<div class="dv-opt" id="2e">
+<div class="dv-olabel"><a class="dv-oid" href="#2e">2e</a>Lápis ao lado do título abre o nome do livro</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="book" demo="title" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="2f">
+<div class="dv-olabel"><a class="dv-oid" href="#2f">2f</a>“Excluir este livro”, no fim do livro: só o livro ou livro e áudios</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp2" start="book" demo="delete" hint-size="390px,844px"></dc-import></div></div>
+</div>
+</div>
+
+<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Paleta v2</div>
+<div style="max-width:1240px;background:#F6EFEC;border-radius:20px;padding:32px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px 40px;font-size:13px;line-height:18px">
+<div style="display:flex;flex-direction:column;gap:10px"><strong style="font-size:15px">Vinaceous Tawny · ação</strong>
+<div style="display:flex;gap:6px"><span style="flex:1;height:44px;border-radius:8px;background:#C56127"></span><span style="flex:1;height:44px;border-radius:8px;background:#A3501F"></span><span style="flex:1;height:44px;border-radius:8px;background:#F6E1D3"></span><span style="flex:1;height:44px;border-radius:8px;background:#8A3F14"></span></div>
+<span>#C56127 base · #A3501F pressionado · #F6E1D3 pastel · #8A3F14 texto</span></div>
+<div style="display:flex;flex-direction:column;gap:10px"><strong style="font-size:15px">Antwerp Blue · origem, progresso, capa</strong>
+<div style="display:flex;gap:6px"><span style="flex:1;height:44px;border-radius:8px;background:#007190"></span><span style="flex:1;height:44px;border-radius:8px;background:#DCEEF3"></span><span style="flex:1;height:44px;border-radius:8px;background:#00586F"></span></div>
+<span>#007190 base · #DCEEF3 pastel · #00586F texto</span></div>
+<div style="display:flex;flex-direction:column;gap:10px"><strong style="font-size:15px">Andover Green · pronto, aprovado</strong>
+<div style="display:flex;gap:6px"><span style="flex:1;height:44px;border-radius:8px;background:#6D7E77"></span><span style="flex:1;height:44px;border-radius:8px;background:#E3E9E6"></span><span style="flex:1;height:44px;border-radius:8px;background:#3F4D47"></span></div>
+<span>#6D7E77 base · #E3E9E6 pastel · #3F4D47 texto</span></div>
+<div style="display:flex;flex-direction:column;gap:10px"><strong style="font-size:15px">Light Brown Drab · papel e tinta</strong>
+<div style="display:flex;gap:6px"><span style="flex:1;height:44px;border-radius:8px;background:#B59392"></span><span style="flex:1;height:44px;border-radius:8px;background:#F6EFEC;border:1px solid #CDB8B6"></span><span style="flex:1;height:44px;border-radius:8px;background:#E4D5D2"></span><span style="flex:1;height:44px;border-radius:8px;background:#8E716F"></span><span style="flex:1;height:44px;border-radius:8px;background:#2E2322"></span></div>
+<span>#B59392 referência · #F6EFEC papel · #E4D5D2 linha · #8E716F borda · #2E2322 tinta</span></div>
+</div>
+
+<p class="dv-next">Próximos passos: “permita mais de um livro” · “mostre a tela de gravação” · “aplique a paleta v2 nas alternativas <a class="dv-oid" href="#1b">1b</a> e <a class="dv-oid" href="#1c">1c</a>”</p>
+</section>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Granny Memories · protótipo Android, 390 px</span></div>
+
+<div style="max-width:760px;margin:0 0 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 32px;font-size:14px;line-height:21px;color:#4F3D3C">
+<p style="margin:0"><strong style="color:#2E2322">Fontes.</strong> Literata no texto do livro. Atkinson Hyperlegible na interface, desenhada para leitores com baixa visão.</p>
+<p style="margin:0"><strong style="color:#2E2322">Navegação.</strong> Fluxo linear com “Voltar”. Ajustes ficam no topo do Início. O botão redondo no canto é o espaço da ghost writer (sem tela).</p>
+<p style="margin:0"><strong style="color:#2E2322">Placeholders.</strong> Tamanho do modelo (1,9 GB), ilustração do estado vazio e os grupos “Hoje / Esta semana” em <a class="dv-oid" href="#1c">1c</a>.</p>
+</div>
+
+<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Protótipo navegável</div>
+<div class="dv-opts" style="margin-bottom:56px">
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Toque para navegar. Áudio 1 abre o fluxo completo.</div>
+<div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp" start="{{ jump }}" nonce="{{ nonce }}" hint-size="390px,844px"></dc-import></div></div>
+<div style="display:flex;flex-direction:column;gap:8px;width:200px;padding-top:8px">
+<span style="font-size:13px;color:#66504F;margin-bottom:4px">Ir direto para</span>
+<sc-for list="{{ jumps }}" as="j" hint-placeholder-count="5">
+<button onClick="{{ j.onClick }}" style="height:44px;display:flex;align-items:center;gap:10px;padding:0 14px;border:1px solid #CDB8B6;border-radius:12px;background:#F6EFEC;color:#2E2322;font:700 15px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer;text-align:left" style-hover="background:#FCF8F6;border-color:#C56127"><span style="width:22px;height:22px;border-radius:999px;background:#2E2322;color:#F6EFEC;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">{{ j.n }}</span>{{ j.label }}</button>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+
+<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Início: alternativas</div>
+<div class="dv-opts" style="margin-bottom:56px">
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Cartões grandes, gravar no topo</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp" home-variant="cartoes" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Linha do tempo por data</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp" home-variant="linha" hint-size="390px,844px"></dc-import></div></div>
+</div>
+</div>
+
+<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Estados</div>
+<div class="dv-opts" style="margin-bottom:56px">
+<div class="dv-opt" id="1d">
+<div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Vazio: Início sem áudios</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp" start="empty" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="1e">
+<div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Carregando: transcrição</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp" start="loadingTrans" hold="{{ holdTrans }}" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="1f">
+<div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>Carregando: capítulo no celular</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp" start="loadingChapter" hold="{{ holdChapter }}" hint-size="390px,844px"></dc-import></div></div>
+</div>
+<div class="dv-opt" id="1g">
+<div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>Erro de rede na transcrição</div>
+<div style="padding:10px;background:#231B1A;border-radius:46px;box-shadow:0 12px 32px rgba(46,35,34,.18)"><div style="width:390px;height:844px;border-radius:36px;overflow:hidden"><dc-import name="GrannyApp" start="netError" hint-size="390px,844px"></dc-import></div></div>
+</div>
+</div>
+
+<div id="sistema" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#66504F;margin:0 0 14px">Sistema mínimo</div>
+<div style="max-width:1240px;background:#F6EFEC;border-radius:20px;padding:36px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px 56px">
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font-size:20px;font-weight:700">Cores (paleta v2)</h3>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;font-size:13px;line-height:18px">
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#F6EFEC;border:1px solid #CDB8B6;flex:none"></span><span><strong>paper</strong> #F6EFEC<br>fundo (de #B59392)</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#FCF8F6;border:1px solid #CDB8B6;flex:none"></span><span><strong>paper-raised</strong> #FCF8F6<br>cartões, folhas</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#EFE4E1;flex:none"></span><span><strong>paper-sunk</strong> #EFE4E1<br>avisos, hover</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#E4D5D2;flex:none"></span><span><strong>line</strong> #E4D5D2<br>divisórias</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#2E2322;flex:none"></span><span><strong>ink</strong> #2E2322<br>texto</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#66504F;flex:none"></span><span><strong>ink-soft</strong> #66504F<br>texto secundário</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#8E716F;flex:none"></span><span><strong>ink-border</strong> #8E716F<br>bordas de controle</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#C56127;flex:none"></span><span><strong>tawny</strong> #C56127<br>ação, botão principal</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#A3501F;flex:none"></span><span><strong>tawny-pressed</strong> #A3501F</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#F6E1D3;flex:none"></span><span><strong>tawny-tint</strong> #F6E1D3<br>texto em #8A3F14</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#007190;flex:none"></span><span><strong>blue</strong> #007190<br>capa, progresso</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#DCEEF3;flex:none"></span><span><strong>blue-tint</strong> #DCEEF3<br>selo de origem, texto #00586F</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#FAEDB5;border:1px solid #E2C866;flex:none"></span><span><strong>gap</strong> #FAEDB5<br>lacuna, borda #E2C866</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#E3E9E6;flex:none"></span><span><strong>green-tint</strong> #E3E9E6<br>pronto, texto #3F4D47</span></div>
+<div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:#F5DAD3;flex:none"></span><span><strong>error-tint</strong> #F5DAD3<br>ícone em #9A2E22</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font-size:20px;font-weight:700">Tipografia</h3>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div><div style="font-size:12px;color:#66504F">display · Atkinson 700 · 32/38</div><div style="font-size:32px;line-height:38px;font-weight:700">Meus áudios</div></div>
+<div><div style="font-size:12px;color:#66504F">title · Atkinson 700 · 30/36 (telas) · 24/30 (folhas)</div><div style="font-size:24px;line-height:30px;font-weight:700">Qual palavra você disse aqui?</div></div>
+<div><div style="font-size:12px;color:#66504F">book-title · Literata 600 · 30/38</div><div style="font-family:'Literata',Georgia,serif;font-size:30px;line-height:38px;font-weight:600">O bolo de laranja</div></div>
+<div><div style="font-size:12px;color:#66504F">book · Literata 400 · 21/35</div><div style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:35px">Toda sexta-feira a casa cheirava a laranja.</div></div>
+<div><div style="font-size:12px;color:#66504F">button · Atkinson 700 · 19 · body · 400 · 17–19/24–28</div><div style="font-size:18px;line-height:26px">O app separou 3 ideias.</div></div>
+<div><div style="font-size:12px;color:#66504F">small · Atkinson 700 · 15/20 (mínimo)</div><div style="font-size:15px;line-height:20px;font-weight:700">Áudio 1 · 00:03</div></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<h3 style="margin:0;font-size:20px;font-weight:700">Espaço, raios, toque</h3>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px">s-1</span><span style="height:12px;width:4px;background:#C56127"></span>4</div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px">s-2</span><span style="height:12px;width:8px;background:#C56127"></span>8</div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px">s-3</span><span style="height:12px;width:12px;background:#C56127"></span>12</div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px">s-4</span><span style="height:12px;width:16px;background:#C56127"></span>16</div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px">s-5</span><span style="height:12px;width:24px;background:#C56127"></span>24 · margem lateral da tela</div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px">s-6</span><span style="height:12px;width:32px;background:#C56127"></span>32</div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px">s-7</span><span style="height:12px;width:48px;background:#C56127"></span>48</div>
+</div>
+<div style="font-size:14px;line-height:22px;color:#4F3D3C">Raios: 12 (campos, avisos) · 14 (botões) · 18 (cartões) · 24 (folhas) · 999 (selos, tags).<br>Toque: mínimo 48 · botão principal 60 (64 no Início) · secundário 56 · campos 56.<br>Sombra só em folha e toast (no React Native, use <code>elevation</code>).</div>
+</div>
+
+<div style="grid-column:1/-1;display:flex;flex-direction:column;gap:18px">
+<h3 style="margin:0;font-size:20px;font-weight:700">Componentes</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px 40px;align-items:start">
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">PrimaryButton</strong> · um por tela</span><button style="height:60px;width:100%;border:0;border-radius:14px;background:#C56127;color:#FFFFFF;font:700 19px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#B2571F" style-active="background:#A3501F">Escrever o capítulo</button></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">SecondaryButton</strong> · contorno</span><button style="height:56px;width:100%;border:2px solid #8E716F;border-radius:14px;background:transparent;color:#2E2322;font:700 18px/1 'Atkinson Hyperlegible',sans-serif;cursor:pointer" style-hover="background:#EDE1DE">Escolher um áudio</button></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">SourceSeal</strong> · selo de origem, área de toque 48</span><span style="display:flex;gap:8px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>Áudio 2 · 00:20</span><span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>Sua resposta</span></span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">StatusTag</strong> · Pronto, Transcrevendo, Na fila</span><span style="display:flex;gap:8px;flex-wrap:wrap">
+<span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#E3E9E6;color:#3F4D47;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;background:#6D7E77"></span>Pronto</span>
+<span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;background:#007190"></span>Transcrevendo</span>
+<span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:#ECE0DE;color:#66504F;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:999px;border:2px solid #66504F;box-sizing:border-box"></span>Na fila</span></span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">IdeaCard</strong> · tipo, resumo, origem; abre o trecho</span>
+<div style="border:1px solid #E4D5D2;border-radius:18px;background:#FCF8F6;padding:18px 20px;display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+<span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:999px;background:#ECE0DE;color:#4F3D3C;font-size:15px;font-weight:700">Fato</span>
+<span style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:30px">A avó dizia que o bolo ainda não estava no ponto.</span>
+<span style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 8px;border-radius:999px;background:#DCEEF3;color:#00586F;font-size:15px;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"></path></svg>Áudio 1 · 00:14</span>
+</div></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">GapPrompt</strong> · lacuna com pergunta e resposta</span>
+<div style="padding:18px;border-radius:16px;background:#FAEDB5;border:1px solid #E2C866;display:flex;flex-direction:column;gap:10px">
+<span style="font-size:15px;font-weight:700;color:#5C4709">Falta uma parte</span>
+<span style="font-family:'Literata',Georgia,serif;font-size:21px;line-height:30px;font-weight:600">Quem cortava o primeiro pedaço?</span>
+<span style="font-size:17px;line-height:24px;color:#4F3D3C">No áudio, essa palavra não ficou clara.</span>
+<span style="height:56px;border:2px solid #8E716F;border-radius:12px;background:#FFFCFB;display:flex;align-items:center;padding:0 16px;color:#7F6866;font-size:19px">Escreva sua resposta</span>
+</div></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">PrivacySeal</strong> · rodapé do Início</span>
+<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:#EFE4E1;color:#4F3D3C;font-size:15px;line-height:21px"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex:none"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>Seus textos ficam no seu celular. Só o áudio é enviado para ser transcrito.</span></div></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">DoubtfulWord</strong> · palavra duvidosa na transcrição</span>
+<p style="margin:0;font-family:'Literata',Georgia,serif;font-size:21px;line-height:36px">…não estava no ponto. <span style="padding:2px 10px;background:#F6E1D3;color:#8A3F14;border-bottom:2px dashed #C56127;border-radius:6px 6px 0 0">[?]</span> cortava…</p></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;color:#66504F"><strong style="color:#2E2322">Também usados</strong></span>
+<span style="font-size:14px;line-height:22px;color:#4F3D3C">ScreenHeader (Voltar + espaço da ghost writer) · StepLabel (“Passo 2 de 3”) · BottomActionBar · ProgressBar · BottomSheet · Toast · AudioRow · TextField com Mostrar/Ocultar</span></div>
+
+</div>
+</div>
+</div>
+
+<p class="dv-next">Próximos passos: “use <a class="dv-oid" href="#1b">1b</a> como Início” · “mostre a tela de gravação” · “teste a fonte do livro maior”</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { jump: 'home', nonce: 0, jump2: 'library', nonce2: 0 };
+  renderVals() {
+    const go = (k) => () => this.setState(s => ({ jump: k, nonce: s.nonce + 1 }));
+    const go2 = (k) => () => this.setState(s => ({ jump2: k, nonce2: s.nonce2 + 1 }));
+    return {
+      jump2: this.state.jump2, nonce2: this.state.nonce2, pageTwo: 2, holdVoice: 58,
+      jumps2: [
+        { n: '1', label: 'Meus livros', onClick: go2('library') },
+        { n: '2', label: 'Livro', onClick: go2('book') },
+        { n: '3', label: 'Transcrição', onClick: go2('trans') },
+        { n: '4', label: 'Seu jeito de contar', onClick: go2('voice') },
+        { n: '5', label: 'Ideias', onClick: go2('ideas') },
+        { n: '6', label: 'Capítulo', onClick: go2('chapter') },
+        { n: '7', label: 'Prévia do livro', onClick: go2('preview') },
+        { n: '8', label: 'Configuração', onClick: go2('config') }
+      ],
+      jump: this.state.jump, nonce: this.state.nonce, holdTrans: 64, holdChapter: 62,
+      jumps: [
+        { n: '1', label: 'Início', onClick: go('home') },
+        { n: '2', label: 'Transcrição', onClick: go('trans') },
+        { n: '3', label: 'Ideias', onClick: go('ideas') },
+        { n: '4', label: 'Capítulo', onClick: go('chapter') },
+        { n: '5', label: 'Configuração', onClick: go('config') }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

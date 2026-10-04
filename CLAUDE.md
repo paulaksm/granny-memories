@@ -61,7 +61,7 @@ Itens que o `.gitignore` deve sempre bloquear: `.env*` (exceto `.env.example`), 
 - Perfil de voz mínimo: estatísticas calculadas por código, trechos reais da autora como exemplos e no máximo 3 traços descritos pelo modelo. A autora aprova cada traço, e o redator usa só os traços aprovados.
 - Como o harness roda na fatia (runner, saída em JSON por esquema convertida em arquivos por código, verificação `limpeza`, formato dos traços de voz, ModeloLocal, testes): `docs/harness-fatia.md`, aprovado.
 - Modelo local: Gemma 4 E2B instruct, GGUF Q4_K_M (cerca de 3,1 GB, Apache 2.0), baixado do Hugging Face no aparelho.
-- Telas mínimas, seguindo o protótipo do Claude Design: escolher ou gravar um áudio, transcrever, aprovar o perfil de voz, ver as ideias e ler o capítulo com os IDs de origem.
+- Telas: o protótipo completo do Claude Design em `design/design_handoff_granny_memories/` (vários livros, linha do tempo, capítulos com ordem, prévia, configuração), com os ajustes registrados em `docs/decisoes.md` (2026-10-04, "telas seguem o protótipo"): correção mínima da transcrição, só traços aprovados, app aberto durante processos longos, sem fila automática, sem botão da ghost writer, sem edição do capítulo nem resposta a lacunas. Ordem de trabalho: harness e fluxo de um áudio até o capítulo primeiro; livros, ordem, exclusão e prévia depois.
 - O maestro (RF11) fica fora do recorte, em tela e em código: na fatia, a ordem das etapas é um runner determinístico em TypeScript, sem agente orquestrador. A voz da ghost writer aparece só nas notas e perguntas que o redator de capítulos devolve.
 - Entregáveis do desafio: repositório público com README (sem segredos nem dados pessoais), demonstração em vídeo e o post na DEV.
 

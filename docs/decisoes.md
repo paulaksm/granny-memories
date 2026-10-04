@@ -55,3 +55,17 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
 - **Decisão:** Gemma 4 E2B instruct, GGUF Q4_K_M (cerca de 3,1 GB), nos dois aparelhos, baixado do Hugging Face na primeira abertura. E4B (cerca de 5 GB) só como opção futura para o redator no S25. Contexto inicial de 8192 tokens; temperaturas iniciais: limpeza 0,1, extrator 0,2, analista 0,3, redator 0,6.
 - **Motivo:** cabe com folga no piso de 8 GB; licença Apache 2.0, sem cadastro; há uso documentado com o llama.rn; habilita a categoria Gemma do desafio. O E4B com contexto e app passaria de 6 GB.
 - **PRD afetado:** Arquitetura (linha "Modelo local"); Decisões em aberto ("Qual modelo local usar" e "O llama.rn oferece saída estruturada").
+
+## 2026-10-04: telas seguem o protótipo do Claude Design
+
+- **Decisão:** as telas seguem o protótipo completo do handoff (`design/design_handoff_granny_memories/`, protótipo 2a e tela de voz): Meus livros (vários livros e rascunhos sem livro), Livro (linha do tempo, capítulos com ordem por setas, exclusão), Transcrição, Seu jeito de contar, Ideias, Capítulo, Prévia do livro e Configuração, com as folhas e os estados. Ajustes em relação ao handoff:
+  - **Correção mínima da transcrição (RF3 mínimo):** palavras de baixa confiança do Scribe aparecem como `[?]`; a autora toca e corrige. A transcrição bruta original continua imutável; a correção fica numa camada separada e a limpeza roda sobre o texto corrigido.
+  - **Só traços aprovados** ("Isso sou eu") entram na escrita. "Usar meu jeito de contar" fica desativado até ela decidir todos os traços (o handoff usava os não decididos).
+  - **Processos longos com o app aberto:** o texto passa a pedir que o app fique aberto; não há execução com o app fechado na fatia.
+  - **Rede:** sem fila automática; o áudio fica "Na fila" e o botão "Tentar agora" reenvia.
+  - **Ghost writer:** o botão de balão fica escondido (maestro fora do recorte).
+  - **Tamanho do modelo:** o valor real do Gemma 4 E2B Q4_K_M (cerca de 3,1 GB), não 1,9 GB.
+  - **Fora:** editar o capítulo e responder lacunas virando passagem ("Sua resposta"). As lacunas aparecem como perguntas. "Aprovar capítulo" só muda o status.
+  - **Gravar e escolher arquivo:** sem tela no protótipo; versão simples com os tokens do design.
+- **Motivo:** escolha da autora do projeto, ciente do risco de prazo. Para proteger a entrega, a ordem de trabalho é harness e fluxo de um áudio até o capítulo primeiro; livros, ordem, exclusão e prévia depois.
+- **PRD afetado:** Escopo, "Fora do MVP" ("Mais de um livro por autora" passa a estar dentro, ao menos na interface); Jornada (telas); RF3 em versão mínima; RF6 (aprovação por traço).

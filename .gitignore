@@ -114,3 +114,7 @@ expo-env.d.ts
 *.orig.*
 *.mobileprovision
 .metro-health-check*
+
+# Design: só o pacote de handoff entra (o resto são cópias do export)
+/design/*
+!/design/design_handoff_granny_memories/
