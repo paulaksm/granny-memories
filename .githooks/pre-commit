@@ -1,0 +1,28 @@
+#!/bin/sh
+# Bloqueia o commit se houver segredo ou arquivo proibido no que está staged.
+# Ativação (uma vez por clone): git config core.hooksPath .githooks
+set -eu
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: gitleaks não encontrado. Instale: https://github.com/gitleaks/gitleaks#installing" >&2
+  exit 1
+fi
+
+gitleaks git --pre-commit --staged --redact --no-banner .
+
+# Defesa extra: extensões e pastas que nunca entram, mesmo com git add -f.
+proibidos=$(git diff --cached --name-only --diff-filter=ACMR | grep -Ei \
+  -e '\.(opus|m4a|mp3|wav|aac|ogg|flac|3gp|amr|mp4|mov|webm|mkv)$' \
+  -e '\.(gguf|ggml|bin|onnx|safetensors|tflite|task|litertlm)$' \
+  -e '\.(keystore|jks|p8|p12|pem|key)$' \
+  -e '(^|/)\.env($|\.)' \
+  -e '(^|/)(google-services\.json|GoogleService-Info\.plist|credentials\.json)$' \
+  -e '^(transcricoes|notas|livro|voz|controle|fechamento)/' \
+  -e '(^|/)backup-[^/]*\.zip$' \
+  | grep -v -E '(^|/)\.env\.example$' || true)
+
+if [ -n "$proibidos" ]; then
+  echo "pre-commit: arquivos proibidos neste repositório público:" >&2
+  echo "$proibidos" | sed 's/^/  /' >&2
+  exit 1
+fi

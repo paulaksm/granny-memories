@@ -1,0 +1,12 @@
+# Varredura de segredos (gitleaks). Roda no pre-commit (.githooks/pre-commit)
+# e no GitHub Actions (.github/workflows/gitleaks.yml).
+# Nunca desative esta varredura nem acrescente exceções para segredos reais.
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "elevenlabs-api-key"
+description = "Chave da API da ElevenLabs"
+regex = '''\bsk_[0-9a-f]{48}\b'''
+keywords = ["sk_"]

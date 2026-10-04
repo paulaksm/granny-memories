@@ -1,0 +1,104 @@
+# ============================================================
+# SEGURANÇA: este repositório é PÚBLICO. Nada daqui pode subir.
+# ============================================================
+
+# Segredos e credenciais
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p8
+*.p12
+*.pem
+*.key
+google-services.json
+GoogleService-Info.plist
+credentials.json
+eas-secrets*
+
+# Áudios (dados pessoais)
+*.opus
+*.m4a
+*.mp3
+*.wav
+*.aac
+*.ogg
+*.flac
+*.3gp
+*.amr
+
+# Modelos e arquivos grandes (o app baixa no aparelho)
+*.gguf
+*.onnx
+*.bin
+*.safetensors
+*.ggml
+*.tflite
+*.task
+*.litertlm
+
+# Dados do projeto do livro (ficam só no aparelho)
+/transcricoes/
+/notas/
+/livro/
+/voz/
+/controle/
+/fechamento/
+/dados/
+/data/
+backup-*.zip
+*.backup
+
+# Saídas de teste com dados reais
+/tmp/
+/scratch/
+*.local.md
+
+# ============================================================
+# Ferramentas
+# ============================================================
+
+# Node / Expo
+node_modules/
+.expo/
+.expo-shared/
+dist/
+web-build/
+npm-debug.*
+yarn-error.*
+*.tsbuildinfo
+
+# Android / iOS gerados
+/android/
+/ios/
+*.apk
+*.aab
+*.ipa
+.gradle/
+build/
+local.properties
+
+# Python (scripts de referência)
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Editor e sistema
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Vídeos (a demonstração pode ter voz real)
+*.mp4
+*.mov
+*.webm
+*.mkv
+
+# Ferramentas locais (configurações e credenciais da máquina)
+.claude/settings.local.json
+.devrelay/home/
