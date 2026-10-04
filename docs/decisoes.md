@@ -69,3 +69,10 @@ Registro de decisões do projeto: data, decisão, motivo e seção do PRD afetad
   - **Gravar e escolher arquivo:** sem tela no protótipo; versão simples com os tokens do design.
 - **Motivo:** escolha da autora do projeto, ciente do risco de prazo. Para proteger a entrega, a ordem de trabalho é harness e fluxo de um áudio até o capítulo primeiro; livros, ordem, exclusão e prévia depois.
 - **PRD afetado:** Escopo, "Fora do MVP" ("Mais de um livro por autora" passa a estar dentro, ao menos na interface); Jornada (telas); RF3 em versão mínima; RF6 (aprovação por traço).
+
+## 2026-10-04: teste técnico no S24 (Gemma 4 E2B)
+
+- **Resultado:** no Galaxy S24 (SM-S921B, Exynos 2400, Android 16, 7,4 GB de RAM), o llama.rn enxerga só a CPU. O Gemma 4 E2B Q4_K_M carregou em 4,8 s; o app chegou a 2,9 GB de memória (PSS) sem ser fechado. Leitura do prompt: 42 a 59 tokens/s; geração: 11 a 12,5 tokens/s. A limpeza de um parágrafo sintético levou 21 s e passou na verificação `limpeza`; o extrator levou 26 s e devolveu JSON válido no esquema, com trecho literal exato. Estimativa para um áudio de 5 min: de 6 a 8 min do áudio ao capítulo.
+- **Observação de qualidade:** o resumo de uma ideia trocou "a gente" por "a família", palavra que ela não usou. O resumo não passa por verificação literal; a tela mostra o trecho original ao lado.
+- **Decisão:** manter o Gemma 4 E2B, só CPU no S24, e seguir com as telas. Falta medir no S25.
+- **PRD afetado:** Requisitos não funcionais (tempo de redação e memória, antes "a definir"); Plano e marcos, marco 1 (teste técnico) cumprido no S24.
