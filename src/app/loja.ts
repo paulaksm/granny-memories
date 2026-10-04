@@ -274,7 +274,10 @@ export async function lerComoFala(audioId: string) {
     const ideias = await r.extrair(audioId);
     passo('ler', audioId, 0.75);
     if (!ideias.ok) throw new Error(ideias.erros[0]?.msg ?? 'Não consegui separar as ideias.');
-    if (!(await arq.existe(ARQUIVOS.guiaVoz))) {
+    // Enquanto a autora não decidiu os traços, o perfil é refeito com todos os áudios lidos.
+    const guiaDecidido =
+      (await arq.existe(ARQUIVOS.guiaVoz)) && (await arq.ler(ARQUIVOS.guiaVoz)).includes('status: aprovado');
+    if (!guiaDecidido) {
       const prontos: string[] = [];
       for (const a of estado.dados.audios) {
         if (await arq.existe(`${PASTAS.clean}/${a.id}.md`)) prontos.push(a.id);
