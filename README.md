@@ -83,7 +83,7 @@ No app: **Ajustes → Chave da ElevenLabs** (a chave fica no armazenamento segur
 ### Testes
 
 ```bash
-npm test          # harness: verificações, conversões, estatísticas e o runner de ponta a ponta (22 testes)
+npm test          # harness: verificações, conversões, estatísticas e o runner de ponta a ponta (23 testes)
 npm run typecheck
 
 # opcional: chamada real ao Scribe com um áudio de voz sintética
