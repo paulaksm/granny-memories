@@ -216,7 +216,12 @@ export function capituloParaArquivos(
     .join('\n\n');
   const capitulo = `---\ntitulo: ${umaLinha(cap.titulo)}\nstatus: rascunho\n---\n${corpo}\n`;
 
-  const perguntas = [...(cap.perguntas ?? [])].filter((p) => p.texto?.trim());
+  // Modelos pequenos às vezes preenchem o campo com "Nenhuma" em vez de deixar a lista vazia.
+  const vazia = /^(nenhum|nenhuma|n\/a|na|sem perguntas?|-)\.?$/i;
+  const perguntas = [...(cap.perguntas ?? [])].filter((p) => {
+    const t = p.texto?.trim() ?? '';
+    return t.length > 3 && !vazia.test(t);
+  });
   for (const [a, b] of contradicoes) {
     const coberta = perguntas.some(
       (p) => p.tipo === 'contradição' && p.origem.includes(a) && p.origem.includes(b),

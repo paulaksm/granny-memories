@@ -129,6 +129,24 @@ describe('capítulo gerado por código', () => {
   });
 });
 
+describe('perguntas do capítulo', () => {
+  test('"Nenhuma" e textos vazios não viram pergunta', () => {
+    const { perguntas } = capituloParaArquivos(
+      {
+        titulo: 'T',
+        paragrafos: [{ texto: 'Era dia de bolo.', atomos: ['A-001'] }],
+        perguntas: [
+          { texto: 'Nenhuma', origem: [], tipo: 'lacuna' },
+          { texto: ' ', origem: [], tipo: 'lacuna' },
+          { texto: 'Qual era o nome da vendedora?', origem: ['A-001'], tipo: 'lacuna' },
+        ],
+      },
+      [],
+    );
+    expect(perguntas.map((p) => p.texto)).toEqual(['Qual era o nome da vendedora?']);
+  });
+});
+
 describe('guia de voz', () => {
   const guia = guiaDeVoz(
     ['audio-01'],
