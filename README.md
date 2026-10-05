@@ -6,6 +6,8 @@ Um app Android que transforma os áudios que uma avó grava contando a vida dela
 
 Feito para a minha avó, no [Hacktoberfest Weekend Challenge: Build for a Friend](https://dev.to/challenges/hacktoberfest-weekend-2026-10-01), da DEV.
 
+📝 **Post do envio na DEV:** [Granny Memories: a ghost writer that lives on my grandma's phone](https://dev.to/paulaksm/granny-memories-a-ghost-writer-that-lives-on-my-grandmas-phone-515f)
+
 ## Para quem e por quê
 
 As histórias da minha avó estão espalhadas em áudios de WhatsApp. Transformar isso em livro exige reescrever tudo, e no caminho a voz de quem conta se perde: o texto fica "bem escrito" e deixa de soar como ela.
